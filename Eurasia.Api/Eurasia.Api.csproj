@@ -10,4 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Eurasia.BusinessLogic\Eurasia.BusinessLogic.csproj" />
+    <ProjectReference Include="..\Eurasia.Domains\Eurasia.Domains.csproj" />
+  </ItemGroup>
+
 </Project>
