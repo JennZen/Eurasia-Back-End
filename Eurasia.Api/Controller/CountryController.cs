@@ -5,7 +5,7 @@ using Eurasia.Domains.Enums.Eurasia;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Eursia.Api.Controller
+namespace Eurasia.Api.Controller
 {
     [Route("api/session")]
     [ApiController]
@@ -15,7 +15,7 @@ namespace Eursia.Api.Controller
         internal ICountryAction _countries;
         public AuthController()
         {
-            var bl = new Eurasia.BusinessLogic.BusinessLogic();
+            var bl = new BusinessLogic.BusinessLogic();
             _countries = bl.GetMainInfoCountryActions();
         }
 
