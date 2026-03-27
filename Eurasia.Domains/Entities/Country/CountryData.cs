@@ -15,12 +15,9 @@ namespace Eurasia.Domains.Entities.Country
         public string Name { get; set; }
         public string FormalName { get; set; }
         public string FlagUrl { get; set; }
-
         public int Population { get; set; }
-
         public List<Continents>? Continents { get; set; }
-        public List<CityData>? Cities { get; set; }
-
+        //public List<CityData>? Cities { get; set; }
         public string Summary { get; set; }
         public DescriptionData Description { get; set; }
     }

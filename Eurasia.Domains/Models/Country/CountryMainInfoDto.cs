@@ -15,6 +15,5 @@ namespace Eurasia.Domains.Models.Country
         public int Population { get; set; }
         public List<Continents>? Continents { get; set; }
         public string Summary { get; set; }
-
     }
 }
