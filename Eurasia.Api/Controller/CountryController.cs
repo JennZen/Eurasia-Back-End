@@ -1,6 +1,7 @@
 ﻿
 using Eurasia.BusinessLogic;
 using Eurasia.BusinessLogic.Interface;
+using Eurasia.Domains.Entities.Country;
 using Eurasia.Domains.Enums.Eurasia;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,18 +21,18 @@ namespace Eurasia.Api.Controller
         }
 
 
-        [HttpGet("satus")]
+        [HttpGet("status")]
         public IActionResult Get()
         {
             return Ok("Session is active");
         }
 
-        [HttpGet("continent")]
+        /*[HttpGet("continent")]
         public IActionResult Post([FromQuery] List<Continents> continents)
         {
 
             var allCountries = _countries.GetAllCountriesMainInfoDtos(continents);
             return Ok(allCountries);
-        }
+        }*/
     }
 }

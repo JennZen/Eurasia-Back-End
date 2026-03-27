@@ -12,11 +12,9 @@ namespace Eurasia.BusinessLogic.Core.Country
 {
     public class CountryMainInfoAction
     {
-        public List<CountryMainInfoDto> GetCountryMainInfoDtos(List<Continents> filterContinents)
-        {
-            List<CountryMainInfoDto> mockData = new List<CountryMainInfoDto>
+        private static List<CountryData> _mockDb = new List<CountryData>
             {
-                new CountryMainInfoDto
+                new CountryData
                 {
                     Uuid = Guid.NewGuid().ToString(),
                     Name = "Молдова",
@@ -25,7 +23,7 @@ namespace Eurasia.BusinessLogic.Core.Country
                     Continents = new List<Continents> { Continents.Asia, Continents.Europe },
                     Summary = "Ещё лучше"
                 },
-                new CountryMainInfoDto
+                new CountryData
                 {
                     Uuid = Guid.NewGuid().ToString(),
                     Name = "Франция",
@@ -34,7 +32,7 @@ namespace Eurasia.BusinessLogic.Core.Country
                     Continents = new List<Continents> { Continents.Europe },
                     Summary = "Хорошо"
                 },
-                new CountryMainInfoDto
+                new CountryData
                 {
                     Uuid = Guid.NewGuid().ToString(),
                     Name = "Турция",
@@ -46,7 +44,45 @@ namespace Eurasia.BusinessLogic.Core.Country
             };
 
 
-            return mockData.Where(country => country.Continents.Any(c => filterContinents.Contains(c))).ToList();
+        /*????public List<CountryMainInfoDto> GetCountryMainInfoDtos(List<Continents> filterContinents)
+        {
+            return _mockDb.Where(country => country.Continents.Any(c => filterContinents.Contains(c))).ToList();
+        }*/
+
+        public void Create(CountryData country)
+        {
+            _mockDb.Add(country);
+        }
+        public List<CountryData> GetAll()
+        {
+            return _mockDb;
+        }
+
+        public CountryData? GetById(string uuid)
+        {
+            return _mockDb.FirstOrDefault(c => c.Uuid == uuid);
+        }
+        public void Update(CountryData country)
+        {
+            var existingCountry = _mockDb.FirstOrDefault(c => c.Uuid == country.Uuid);
+
+            if (existingCountry != null)
+            {
+                existingCountry.Name = country.Name;
+                existingCountry.FlagUrl = country.FlagUrl;
+                existingCountry.Population = country.Population;
+                existingCountry.Continents = country.Continents;
+                existingCountry.Summary = country.Summary;
+                existingCountry.Description = country.Description;
+            }
+        }
+        public void Delete(string uuid)
+        {
+            var existingCountry = _mockDb.FirstOrDefault(c => c.Uuid == uuid);
+            if (existingCountry != null)
+            {
+                _mockDb.Remove(existingCountry);
+            }
         }
     }
 }
