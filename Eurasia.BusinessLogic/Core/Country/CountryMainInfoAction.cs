@@ -18,6 +18,7 @@ namespace Eurasia.BusinessLogic.Core.Country
                 {
                     Uuid = Guid.NewGuid().ToString(),
                     Name = "Молдова",
+                    FormalName = "Республика Молдова",
                     FlagUrl = "флаг МД",
                     Population = 12,
                     Continents = new List<Continents> { Continents.Asia, Continents.Europe },
@@ -27,6 +28,7 @@ namespace Eurasia.BusinessLogic.Core.Country
                 {
                     Uuid = Guid.NewGuid().ToString(),
                     Name = "Франция",
+                    FormalName = "Французская Республика",
                     FlagUrl = "флаг ФР",
                     Population = 14,
                     Continents = new List<Continents> { Continents.Europe },
@@ -36,6 +38,7 @@ namespace Eurasia.BusinessLogic.Core.Country
                 {
                     Uuid = Guid.NewGuid().ToString(),
                     Name = "Турция",
+                    FormalName = "Турецкая Республика",
                     FlagUrl = "флаг Турции",
                     Population = 16,
                     Continents = new List<Continents> { Continents.Asia, Continents.Europe },
@@ -44,7 +47,7 @@ namespace Eurasia.BusinessLogic.Core.Country
             };
 
 
-        /*????public List<CountryMainInfoDto> GetCountryMainInfoDtos(List<Continents> filterContinents)
+        /*????public List<CountryData> GetCountryDatas(List<Continents> filterContinents)
         {
             return _mockDb.Where(country => country.Continents.Any(c => filterContinents.Contains(c))).ToList();
         }*/
@@ -69,11 +72,11 @@ namespace Eurasia.BusinessLogic.Core.Country
             if (existingCountry != null)
             {
                 existingCountry.Name = country.Name;
+                existingCountry.FormalName = country.FormalName;
                 existingCountry.FlagUrl = country.FlagUrl;
                 existingCountry.Population = country.Population;
                 existingCountry.Continents = country.Continents;
                 existingCountry.Summary = country.Summary;
-                existingCountry.Description = country.Description;
             }
         }
         public void Delete(string uuid)

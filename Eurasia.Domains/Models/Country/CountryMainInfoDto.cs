@@ -11,6 +11,7 @@ namespace Eurasia.Domains.Models.Country
     {
         public string Uuid { get; set; } = Guid.NewGuid().ToString();
         public string Name { get; set; }
+        public string FormalName { get; set; }
         public string FlagUrl { get; set; }
         public int Population { get; set; }
         public List<Continents>? Continents { get; set; }
