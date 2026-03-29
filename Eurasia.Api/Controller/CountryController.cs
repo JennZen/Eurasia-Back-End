@@ -25,32 +25,25 @@ namespace Eurasia.Api.Controller
             return Ok("Session is active");
         }
 
-        /*[HttpGet("continent")]
+        [HttpGet("continent")]
         public IActionResult Post([FromQuery] List<Continents> continents)
         {
 
             var allCountries = _countries.GetAllCountriesMainInfoDtos(continents);
             return Ok(allCountries);
-        }*/
+        }
 
-        [HttpDelete("{uuid}")]
-        public IActionResult Delete(string uuid)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-            _countries.Delete(uuid);
+            _countries.Delete(id);
             return Ok();
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
         {
-            var allCountries = _countries.GetAll();
-            return Ok(allCountries);
-        }
-
-        [HttpGet("{uuid}")]
-        public IActionResult GetById(string uuid)
-        {
-            CountryMainInfoDto? country = _countries.GetById(uuid);
+            CountryMainInfoDto? country = _countries.GetById(id);
             if (country == null)
             {
                 return NotFound();
@@ -66,10 +59,10 @@ namespace Eurasia.Api.Controller
             return Ok();
         }
 
-        [HttpPut("{uuid}")]
-        public IActionResult Update(string uuid, CountryMainInfoDto country)
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, CountryMainInfoDto country)
         {
-            country.Uuid = uuid;
+            country.Id = id;
             _countries.Update(country);
             return Ok();
         }
