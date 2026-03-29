@@ -11,14 +11,16 @@ namespace Eurasia.Domains.Entities.Country
 {
     public class CountryData: SharedFields
     {
-        public string Uuid { get; set; } = Guid.NewGuid().ToString();
+        public int Id { get; set; }
         public string Name { get; set; }
         public string FormalName { get; set; }
         public string FlagUrl { get; set; }
         public int Population { get; set; }
         public List<Continents>? Continents { get; set; }
-        //public List<CityData>? Cities { get; set; }
-        public string Summary { get; set; }
-        public DescriptionData Description { get; set; }
+        public string Currency { get; set; }
+        public List<string>? Regions { get; set; }
+        public string Capital { get; set; }
+        public int GeographicalSize { get; set; }
+        public List<string>? Languages { get; set; }
     }
 }
