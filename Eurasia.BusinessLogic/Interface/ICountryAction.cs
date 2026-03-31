@@ -8,8 +8,8 @@ namespace Eurasia.BusinessLogic.Interface
     {
         List<CountryMainInfoDto> GetAllCountriesMainInfoDtos(List<Continents> continents);
         CountryMainInfoDto? GetById(int id);
-        void Create(CountryMainInfoDto country);
-        void Update(CountryMainInfoDto country);
-        void Delete(int id);
+        bool Create(CountryMainInfoDto country);
+        bool Update(CountryMainInfoDto country);
+        bool Delete(int id);
     }
 }

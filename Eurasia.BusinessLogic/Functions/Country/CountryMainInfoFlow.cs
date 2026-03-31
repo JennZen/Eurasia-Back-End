@@ -1,6 +1,8 @@
 ﻿using Eurasia.BusinessLogic.Core.Country;
 using Eurasia.BusinessLogic.Interface;
 using Eurasia.Domains.Entities.Country;
+using Eurasia.Domains.Entities.Language;
+using Eurasia.Domains.Entities.Relations;
 using Eurasia.Domains.Enums.Eurasia;
 using Eurasia.Domains.Models.Country;
 using System;
@@ -30,10 +32,12 @@ namespace Eurasia.BusinessLogic.Functions.Country
                 Regions = country.Regions,
                 Capital = country.Capital,
                 GeographicalSize = country.GeographicalSize,
-                Languages = country.Languages,
+                Languages = country.CountryLanguages?
+                    .Select(cl => cl.Language?.Name ?? "")
+                    .ToList() ?? new List<string>()
             }).ToList();
         }
-        public void Create(CountryMainInfoDto dto)
+        public bool Create(CountryMainInfoDto dto)
         {
             var country = new CountryData
             {
@@ -47,9 +51,12 @@ namespace Eurasia.BusinessLogic.Functions.Country
                 Regions = dto.Regions,
                 Capital = dto.Capital,
                 GeographicalSize = dto.GeographicalSize,
-                Languages = dto.Languages
+                CountryLanguages = dto.Languages?.Select(langName => new CountryLanguage
+                {
+                    Language = new Language { Name = langName }
+                }).ToList()
             };
-            base.Create(country);
+            return base.Create(country);
         }
         public CountryMainInfoDto? GetById(int id)
         {
@@ -72,10 +79,10 @@ namespace Eurasia.BusinessLogic.Functions.Country
                 Regions = country.Regions,
                 Capital = country.Capital,
                 GeographicalSize = country.GeographicalSize,
-                Languages = country.Languages
+                Languages = country.CountryLanguages.Select(cl => cl.Language.Name).ToList()
             };
         }
-        public void Update(CountryMainInfoDto country)
+        public bool Update(CountryMainInfoDto country)
         {
             var existingCountry = base.GetById(country.Id);
             
@@ -91,12 +98,21 @@ namespace Eurasia.BusinessLogic.Functions.Country
                 existingCountry.Regions = country.Regions;
                 existingCountry.Capital = country.Capital;
                 existingCountry.GeographicalSize = country.GeographicalSize;
-                existingCountry.Languages = country.Languages;
+                existingCountry.CountryLanguages = country.Languages?
+            .Select(name => new CountryLanguage
+            {
+                Language = new Language { Name = name }
+            }).ToList() ?? [];
+
+                return base.Update(existingCountry);
             }
+            
+            return false;
         }
-        public void Delete(int id)
+        public bool Delete(int id)
         {
-            base.Delete(id);
+            return base.Delete(id);
+
         }
 
     }
