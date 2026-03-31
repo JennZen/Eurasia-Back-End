@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Eurasia.Api.Controller
 {
-    [Route("api/session")]//incorrect route for the controller - should be "api/countries"
+    [Route("api/countries")]
     [ApiController]
-    public class AuthController : ControllerBase //incorrect name for the controller - should be CountryController    
+    public class CountryController : ControllerBase  
     {
         internal ICountryAction _countries;
-        public AuthController()
+        public CountryController()
         {
             var bl = new BusinessLogic.BusinessLogic();
             _countries = bl.GetMainInfoCountryActions();
@@ -25,7 +25,7 @@ namespace Eurasia.Api.Controller
             return Ok("Session is active");
         }
 
-        [HttpGet("continent")]
+        [HttpGet]
         public IActionResult Post([FromQuery] List<Continents> continents)
         {
 
@@ -36,8 +36,10 @@ namespace Eurasia.Api.Controller
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _countries.Delete(id);
-            return Ok();
+            bool success =_countries.Delete(id);
+            if (!success) return NotFound($"Country with {id} not found");
+
+            return NoContent();
         }
 
         [HttpGet("{id}")]
@@ -46,7 +48,7 @@ namespace Eurasia.Api.Controller
             CountryMainInfoDto? country = _countries.GetById(id);
             if (country == null)
             {
-                return NotFound();
+                return NotFound($"Country with {id} not found");
             }
 
             return Ok(country);
@@ -55,16 +57,29 @@ namespace Eurasia.Api.Controller
         [HttpPost]
         public IActionResult Create([FromBody] CountryMainInfoDto country)
         {
-            _countries.Create(country);
-            return Ok();
+            if (country == null) return BadRequest("Invalid data");
+
+            bool success = _countries.Create(country);
+            if (!success)
+            {
+                return Conflict(new { message = $"Country with ID {country.Id} already exist." });
+            }
+
+            return CreatedAtAction(nameof(GetById), new { id = country.Id }, country);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, CountryMainInfoDto country)
         {
             country.Id = id;
-            _countries.Update(country);
-            return Ok();
+            bool success = _countries.Update(country);
+            
+            if (!success)
+            {
+                return NotFound($"Country with ID {id} not found");
+            }
+
+            return Ok(country);
         }
     }
 }

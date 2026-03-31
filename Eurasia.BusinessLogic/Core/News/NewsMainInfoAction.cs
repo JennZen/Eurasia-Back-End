@@ -12,8 +12,8 @@ namespace Eurasia.BusinessLogic.Core.News
 {
     public class NewsMainInfoAction: INewsAction
     {
-        private static List<NewsData> _mockDb = new List<NewsData>
-        {
+        private static List<NewsData> _mockDb =
+        [
             new NewsData
             {    Id = 0,
                 //ENUM CATEGORY public string Category { get; set; }
@@ -22,7 +22,7 @@ namespace Eurasia.BusinessLogic.Core.News
                 ImageUrl = string.Empty,
                 PublishedAt = DateTime.MinValue
             }
-        };
+        ];
         public List<NewsData>? GetAllNews()
         {
             return _mockDb;
