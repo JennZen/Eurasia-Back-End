@@ -1,16 +1,8 @@
-﻿using Eurasia.BusinessLogic.Interface;
-using Eurasia.Domains.Entities.Country;
-using Eurasia.Domains.Entities.News;
-using Eurasia.Domains.Models.News;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Eurasia.Domains.Entities.News;
 
 namespace Eurasia.BusinessLogic.Core.News
 {
-    public class NewsMainInfoAction: INewsAction
+    public class NewsMainInfoAction
     {
         private static List<NewsData> _mockDb =
         [
@@ -31,9 +23,15 @@ namespace Eurasia.BusinessLogic.Core.News
         {
             return _mockDb.FirstOrDefault(c => c.Id == id);
         }
-        public void Create(NewsData news)
+        public bool Create(NewsData news)
         {
-            _mockDb.Add(news);
+            var existingNews = _mockDb.FirstOrDefault(c => c.Id == news.Id);
+            if (existingNews == null)
+            {
+                _mockDb.Add(news);
+                return true;
+            }
+            return false;
         }
         public bool Update(NewsData news)
         {
@@ -46,13 +44,15 @@ namespace Eurasia.BusinessLogic.Core.News
 
             return false;
         }
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             var existingNews = _mockDb.FirstOrDefault(c => c.Id == id);
             if (existingNews != null)
             {
                 _mockDb.Remove(existingNews);
+                return true;
             }
+            return false;
         }
     }
 }

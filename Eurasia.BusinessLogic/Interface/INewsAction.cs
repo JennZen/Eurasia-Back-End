@@ -1,20 +1,14 @@
-﻿using Eurasia.Domains.Entities.News;
-using Eurasia.Domains.Models.Country;
-using Eurasia.Domains.Models.News;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Eurasia.Domains.Models.News;
 
 namespace Eurasia.BusinessLogic.Interface
 {
     public interface INewsAction
     {
-        public NewsData? GetById(int id);
-        public void Create(NewsData news);
-        public bool Update(NewsData country);
-        public void Delete(int id);
+        public List<NewsMainInfoDto>? GetAllNews();
+        public NewsMainInfoDto? GetById(int id);
+        public bool Create(NewsMainInfoDto news);
+        public bool Update(NewsMainInfoDto news);
+        public bool Delete(int id);
 
     }
 }

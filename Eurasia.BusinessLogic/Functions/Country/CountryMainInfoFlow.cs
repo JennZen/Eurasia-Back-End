@@ -5,13 +5,6 @@ using Eurasia.Domains.Entities.Language;
 using Eurasia.Domains.Entities.Relations;
 using Eurasia.Domains.Enums.Eurasia;
 using Eurasia.Domains.Models.Country;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Eurasia.BusinessLogic.Functions.Country
 {
@@ -112,7 +105,6 @@ namespace Eurasia.BusinessLogic.Functions.Country
         public bool Delete(int id)
         {
             return base.Delete(id);
-
         }
 
     }

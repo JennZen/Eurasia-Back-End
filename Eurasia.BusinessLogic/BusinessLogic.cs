@@ -1,6 +1,7 @@
 ﻿using Eurasia.BusinessLogic.Core.Country;
 using Eurasia.BusinessLogic.Functions.Country;
 using Eurasia.BusinessLogic.Interface;
+using Eurasia.BusinessLogic.Functions.News;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,11 @@ namespace Eurasia.BusinessLogic
         public ICountryAction GetMainInfoCountryActions()
         {
             return new CountryMainInfoFlow();
+        }
+
+        public INewsAction GetMainInfoNewsActions()
+        { 
+                return new NewsMainInfoFlow();
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Eurasia.Api.Controller
         public IActionResult Delete(int id)
         {
             bool success =_countries.Delete(id);
-            if (!success) return NotFound($"Country with {id} not found");
+            if (!success) return NotFound($"Country with {id} was not found");
 
             return NoContent();
         }
@@ -48,7 +48,7 @@ namespace Eurasia.Api.Controller
             CountryMainInfoDto? country = _countries.GetById(id);
             if (country == null)
             {
-                return NotFound($"Country with {id} not found");
+                return NotFound($"Country with {id} was not found");
             }
 
             return Ok(country);
@@ -62,7 +62,7 @@ namespace Eurasia.Api.Controller
             bool success = _countries.Create(country);
             if (!success)
             {
-                return Conflict(new { message = $"Country with ID {country.Id} already exist." });
+                return Conflict(new { message = $"Country with ID {country.Id} already exists." });
             }
 
             return CreatedAtAction(nameof(GetById), new { id = country.Id }, country);
@@ -76,7 +76,7 @@ namespace Eurasia.Api.Controller
             
             if (!success)
             {
-                return NotFound($"Country with ID {id} not found");
+                return NotFound($"Country with ID {id} was not found");
             }
 
             return Ok(country);
