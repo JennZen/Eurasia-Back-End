@@ -8,50 +8,50 @@ namespace Eurasia.BusinessLogic.Core.Country
     public class CountryMainInfoAction
     {
         private static List<CountryData> _mockDb =
-            [
-                new CountryData
-                {
-                    Id = 38,
-                    Name = "Молдова",
-                    FormalName = "Республика Молдова",
-                    FlagUrl = "флаг МД",
-                    Population = 12,
-                    Continents = [Continents.Asia, Continents.Europe],
-                    Currency = "Молдавский лей",
-                    Regions = ["Восточная Европа"],
-                    Capital = "Кишинёв",
-                    GeographicalSize = 33846,
-                    CountryLanguages = [ new CountryLanguage { Language = new Language { Name = "Romanian" } } ]
-                },
-                new CountryData
-                {
-                    Id = 3,
-                    Name = "Франция",
-                    FormalName = "Французская Республика",
-                    FlagUrl = "флаг ФР",
-                    Population = 14,
-                    Continents = [ Continents.Europe ],
-                    Currency = "Евро",
-                    Regions = ["Западная Европа"],
-                    Capital = "Париж",
-                    GeographicalSize = 643801,
-                    CountryLanguages = [ new CountryLanguage { Language = new Language { Name = "Французский" } } ]
-                },
-                new CountryData
-                {
-                    Id = 55,
-                    Name = "Турция",
-                    FormalName = "Турецкая Республика",
-                    FlagUrl = "флаг Турции",
-                    Population = 16,
-                    Continents = [ Continents.Asia, Continents.Europe ],
-                    Currency = "Турецкая лира",
-                    Regions = ["Юго-Восточная Европа", "Западная Азия"],
-                    Capital = "Анкара",
-                    GeographicalSize = 783562,
-                    CountryLanguages = [ new CountryLanguage { Language = new Language { Name = "Турецкий" } } ]
-                }
-            ];
+        [
+            new CountryData
+            {
+                Id = 38,
+                Name = "Молдова",
+                FormalName = "Республика Молдова",
+                FlagUrl = "флаг МД",
+                Population = 12,
+                Continents = [Continents.Asia, Continents.Europe],
+                Currency = "Молдавский лей",
+                Regions = ["Восточная Европа"],
+                Capital = "Кишинёв",
+                GeographicalSize = 33846,
+                CountryLanguages = [ new CountryLanguage { Language = new Language { Name = "Romanian" } } ]
+            },
+            new CountryData
+            {
+                Id = 3,
+                Name = "Франция",
+                FormalName = "Французская Республика",
+                FlagUrl = "флаг ФР",
+                Population = 14,
+                Continents = [ Continents.Europe ],
+                Currency = "Евро",
+                Regions = ["Западная Европа"],
+                Capital = "Париж",
+                GeographicalSize = 643801,
+                CountryLanguages = [ new CountryLanguage { Language = new Language { Name = "Французский" } } ]
+            },
+            new CountryData
+            {
+                Id = 55,
+                Name = "Турция",
+                FormalName = "Турецкая Республика",
+                FlagUrl = "флаг Турции",
+                Population = 16,
+                Continents = [ Continents.Asia, Continents.Europe ],
+                Currency = "Турецкая лира",
+                Regions = ["Юго-Восточная Европа", "Западная Азия"],
+                Capital = "Анкара",
+                GeographicalSize = 783562,
+                CountryLanguages = [ new CountryLanguage { Language = new Language { Name = "Турецкий" } } ]
+            }
+        ];
 
 
         public List<CountryData> GetCountryDatas(List<Continents> filterContinents)

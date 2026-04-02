@@ -1,6 +1,7 @@
 ﻿using Eurasia.BusinessLogic.Functions.Attraction;
 using Eurasia.BusinessLogic.Functions.Country;
 using Eurasia.BusinessLogic.Interface;
+using Eurasia.BusinessLogic.Functions.News;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace Eurasia.BusinessLogic
         { 
                 return new NewsMainInfoFlow();
         }
-        
+
         public IAttractionAction GetAttractionActions()
         {
             return new AttractionFlow();
