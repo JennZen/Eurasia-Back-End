@@ -18,6 +18,11 @@ namespace Eurasia.BusinessLogic
             return new CountryMainInfoFlow();
         }
 
+        public INewsAction GetMainInfoNewsActions()
+        { 
+                return new NewsMainInfoFlow();
+        }
+        
         public IAttractionAction GetAttractionActions()
         {
             return new AttractionFlow();
