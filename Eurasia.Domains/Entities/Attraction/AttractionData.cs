@@ -1,0 +1,24 @@
+﻿using Eurasia.Domains.Entities.Country;
+
+namespace Eurasia.Domains.Entities.AttractionData
+{
+    public class AttractionData
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string FullDescription { get; set; }
+        public decimal Price { get; set; }
+        public string BGUrl { get; set; }
+        public string ImageUrl { get; set; }
+        public string City { get; set; }
+        public string Duration { get; set; }
+        public string BestTimeToVisit { get; set; }
+        public string OpeningHours { get; set; }
+        public double Rating { get; set; }
+        public int NumberOfReviews { get; set; }
+        public string CountryName { get; set; }
+        public int CountryId { get; set; }
+        public virtual CountryData Country { get; set; }
+    }
+}

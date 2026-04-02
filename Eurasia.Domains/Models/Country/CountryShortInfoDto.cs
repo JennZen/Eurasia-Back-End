@@ -16,6 +16,5 @@ namespace Eurasia.Domains.Models.Country
 		public int Population { get; set; }
 		public string Capital { get; set; }
 		public int GeographicalSize { get; set; }
-
 	}
 }
