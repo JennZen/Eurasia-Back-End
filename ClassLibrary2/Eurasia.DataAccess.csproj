@@ -8,11 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary2\Eurasia.DataAccess.csproj" />
-    <ProjectReference Include="..\Eurasia.Domains\Eurasia.Domains.csproj" />
+	<ProjectReference Include="..\Eurasia.Domains\Eurasia.Domains.csproj" />
   </ItemGroup>
 
 </Project>
