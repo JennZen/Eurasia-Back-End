@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Eurasia.BusinessLogic\Eurasia.BusinessLogic.csproj" />
+    <ProjectReference Include="..\Eurasia.DataAccess\Eurasia.DataAccess.csproj" />
     <ProjectReference Include="..\Eurasia.Domains\Eurasia.Domains.csproj" />
   </ItemGroup>
 

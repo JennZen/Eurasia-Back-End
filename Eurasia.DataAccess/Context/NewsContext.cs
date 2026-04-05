@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Eurasia.DataAccess;
 using Eurasia.Domains.Entities.News;
-using Eurasia.DataAccess;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace Eurasia.DataAccess.Context
 {
-    public class NewsContext: DbContext
+    public class NewsContext : DbContext
     {
         public DbSet<NewsData> News { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

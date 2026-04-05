@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClassLibrary2\Eurasia.DataAccess.csproj" />
+    <ProjectReference Include="..\Eurasia.DataAccess\Eurasia.DataAccess.csproj" />
     <ProjectReference Include="..\Eurasia.Domains\Eurasia.Domains.csproj" />
   </ItemGroup>
 
