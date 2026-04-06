@@ -1,4 +1,5 @@
 ﻿using Eurasia.Domains.Entities.Country;
+using Eurasia.Domains.Entities.Language;
 using Eurasia.Domains.Entities.Relations;
 using Eurasia.Domains.Enums.Eurasia;
 using Microsoft.EntityFrameworkCore;
@@ -14,12 +15,17 @@ namespace Eurasia.DataAccess.Context
     public class CountryContext : DbContext
     {
         public DbSet<CountryData> Countries { get; set; }
+        public DbSet<CountryLanguage> CountryLanguages { get; set; }
+        public DbSet<Language> Languages { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(DbSession.ConnectionString);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Language>()
+                .ToTable("Languages");
+
             modelBuilder.Entity<CountryLanguage>()
                 .HasKey(cl => new { cl.CountryId, cl.LanguageId });
 
