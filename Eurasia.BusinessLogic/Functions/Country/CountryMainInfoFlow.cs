@@ -30,11 +30,10 @@ namespace Eurasia.BusinessLogic.Functions.Country
                     .ToList() ?? new List<string>()
             }).ToList();
         }
-        public bool Create(CountryMainInfoDto dto)
+        public CountryMainInfoDto? Create(CreateCountryDto dto)
         {
             var country = new CountryData
             {
-                Id = dto.Id,
                 Population = dto.Population,
                 Name = dto.Name,
                 FormalName = dto.FormalName,
@@ -49,7 +48,23 @@ namespace Eurasia.BusinessLogic.Functions.Country
                     Language = new Language { Name = langName }
                 }).ToList()
             };
-            return base.Create(country);
+            var created = base.Create(country);
+            if (created == null) return null;
+
+            return new CountryMainInfoDto
+            {
+                Id = created.Id,
+                Name = created.Name,
+                FormalName = created.FormalName,
+                FlagUrl = created.FlagUrl,
+                Population = created.Population,
+                Continents = created.Continents,
+                Currency = created.Currency,
+                Regions = created.Regions,
+                Capital = created.Capital,
+                GeographicalSize = created.GeographicalSize,
+                Languages = created.CountryLanguages?.Select(cl => cl.Language.Name).ToList()
+            };
         }
         public CountryMainInfoDto? GetById(int id)
         {
@@ -72,7 +87,7 @@ namespace Eurasia.BusinessLogic.Functions.Country
                 Regions = country.Regions,
                 Capital = country.Capital,
                 GeographicalSize = country.GeographicalSize,
-                Languages = country.CountryLanguages.Select(cl => cl.Language.Name).ToList()
+                Languages = country.CountryLanguages?.Select(cl => cl.Language.Name).ToList()
             };
         }
         public bool Update(CountryMainInfoDto country)

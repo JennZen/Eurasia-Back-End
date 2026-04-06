@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Eurasia.BusinessLogic.Functions.User;
 
 namespace Eurasia.BusinessLogic
 {
@@ -27,6 +28,10 @@ namespace Eurasia.BusinessLogic
         public IAttractionAction GetAttractionActions()
         {
             return new AttractionFlow();
+        }
+        public IUserAction GetUserActions()
+        {
+            return new UserFlow();
         }
     }
 }

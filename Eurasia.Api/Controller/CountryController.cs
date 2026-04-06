@@ -55,17 +55,17 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] CountryMainInfoDto country)
+        public IActionResult Create([FromBody] CreateCountryDto country)
         {
             if (country == null) return BadRequest("Invalid data");
 
-            bool success = _countries.Create(country);
-            if (!success)
+            var created = _countries.Create(country);
+            if (created == null)
             {
-                return Conflict(new { message = $"Country with ID {country.Id} already exists." });
+                return Conflict(new { message = "Country already exists." });
             }
 
-            return CreatedAtAction(nameof(GetById), new { id = country.Id }, country);
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
         [HttpPut("{id}")]
