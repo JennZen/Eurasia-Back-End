@@ -1,4 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
+//configure database connection
+Eurasia.DataAccess.DbSession.ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 //add services to the container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

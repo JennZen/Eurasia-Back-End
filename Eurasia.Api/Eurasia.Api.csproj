@@ -7,11 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Eurasia.BusinessLogic\Eurasia.BusinessLogic.csproj" />
+    <ProjectReference Include="..\Eurasia.DataAccess\Eurasia.DataAccess.csproj" />
     <ProjectReference Include="..\Eurasia.Domains\Eurasia.Domains.csproj" />
   </ItemGroup>
 
