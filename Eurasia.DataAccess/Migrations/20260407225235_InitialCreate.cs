@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Eurasia.DataAccess.Migrations.Country
+namespace Eurasia.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -17,7 +17,7 @@ namespace Eurasia.DataAccess.Migrations.Country
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FormalName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FlagUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Population = table.Column<int>(type: "int", nullable: false),
@@ -41,7 +41,7 @@ namespace Eurasia.DataAccess.Migrations.Country
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -51,7 +51,7 @@ namespace Eurasia.DataAccess.Migrations.Country
                 });
 
             migrationBuilder.CreateTable(
-                name: "CountryLanguages",
+                name: "CountryLanguage",
                 columns: table => new
                 {
                     CountryId = table.Column<int>(type: "int", nullable: false),
@@ -59,15 +59,15 @@ namespace Eurasia.DataAccess.Migrations.Country
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CountryLanguages", x => new { x.CountryId, x.LanguageId });
+                    table.PrimaryKey("PK_CountryLanguage", x => new { x.CountryId, x.LanguageId });
                     table.ForeignKey(
-                        name: "FK_CountryLanguages_Countries_CountryId",
+                        name: "FK_CountryLanguage_Countries_CountryId",
                         column: x => x.CountryId,
                         principalTable: "Countries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CountryLanguages_Language_LanguageId",
+                        name: "FK_CountryLanguage_Language_LanguageId",
                         column: x => x.LanguageId,
                         principalTable: "Language",
                         principalColumn: "Id",
@@ -75,16 +75,28 @@ namespace Eurasia.DataAccess.Migrations.Country
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CountryLanguages_LanguageId",
-                table: "CountryLanguages",
+                name: "IX_Countries_Name",
+                table: "Countries",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CountryLanguage_LanguageId",
+                table: "CountryLanguage",
                 column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Language_Name",
+                table: "Language",
+                column: "Name",
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CountryLanguages");
+                name: "CountryLanguage");
 
             migrationBuilder.DropTable(
                 name: "Countries");

@@ -5,16 +5,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
-<<<<<<< Updated upstream
-=======
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Eurasia.DataAccess\Eurasia.DataAccess.csproj" />
->>>>>>> Stashed changes
     <ProjectReference Include="..\Eurasia.Domains\Eurasia.Domains.csproj" />
   </ItemGroup>
 

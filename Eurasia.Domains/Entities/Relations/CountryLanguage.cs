@@ -1,4 +1,5 @@
 using Eurasia.Domains.Entities.Country;
+using System.ComponentModel.DataAnnotations;
 
 namespace Eurasia.Domains.Entities.Relations
 {

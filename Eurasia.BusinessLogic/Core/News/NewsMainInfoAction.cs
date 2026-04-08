@@ -1,55 +1,51 @@
-﻿using Eurasia.Domains.Entities.News;
+﻿using Eurasia.DataAccess.Context;
+using Eurasia.Domains.Entities.News;
 
 namespace Eurasia.BusinessLogic.Core.News
 {
     public class NewsMainInfoAction
     {
-        private static List<NewsData> _mockDb =
-        [
-            new NewsData
-            {    Id = 0,
-                //ENUM CATEGORY public string Category { get; set; }
-                Title = "MOLDOVA NEWS",
-                Description = "News...",
-                ImageUrl = string.Empty,
-                PublishedAt = DateTime.MinValue
-            }
-        ];
+        private readonly NewsContext _db = new NewsContext();
         public List<NewsData>? GetAllNews()
         {
-            return _mockDb;
+            return _db.News.ToList();
         }
         public NewsData? GetById(int id)
         {
-            return _mockDb.FirstOrDefault(c => c.Id == id);
+            return _db.News.FirstOrDefault(c => c.Id == id);
         }
         public bool Create(NewsData news)
         {
-            var existingNews = _mockDb.FirstOrDefault(c => c.Id == news.Id);
+            var existingNews = _db.News.FirstOrDefault(c => c.Id == news.Id);
             if (existingNews == null)
             {
-                _mockDb.Add(news);
+                _db.News.Add(news);
+                _db.SaveChanges();
                 return true;
             }
             return false;
         }
         public bool Update(NewsData news)
         {
-            var existingNewsIndex = _mockDb.FindIndex(c => c.Id == news.Id);
-            if(existingNewsIndex != -1)
+            var existing = _db.News.FirstOrDefault(c => c.Id == news.Id);
+            if (existing != null)
             {
-                _mockDb[existingNewsIndex] = news;
+                existing.Title = news.Title;
+                existing.Description = news.Description;
+                existing.ImageUrl = news.ImageUrl;
+                existing.PublishedAt = news.PublishedAt;
+                _db.SaveChanges();
                 return true;
             }
-
             return false;
         }
         public bool Delete(int id)
         {
-            var existingNews = _mockDb.FirstOrDefault(c => c.Id == id);
+            var existingNews = _db.News.FirstOrDefault(c => c.Id == id);
             if (existingNews != null)
             {
-                _mockDb.Remove(existingNews);
+                _db.News.Remove(existingNews);
+                _db.SaveChanges();
                 return true;
             }
             return false;
