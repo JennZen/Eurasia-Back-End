@@ -30,32 +30,17 @@ namespace Eurasia.BusinessLogic.Functions.Attraction
                 OpeningHours = a.OpeningHours,
                 Rating = a.Rating,
                 NumberOfReviews = a.NumberOfReviews,
-                CountryId = a.CountryId
+                CountryId = a.CountryId,
+                CountryName = a.Country?.Name
             }).ToList();
         }
 
         public AttractionDto? GetById(int id)
         {
-            var a = base.GetById(id);
-            if (a == null) return null;
+            var attraction = base.GetById(id);
+            if (attraction == null) return null;
 
-            return new AttractionDto
-            {
-                Id = a.Id,
-                Name = a.Name,
-                Description = a.Description,
-                FullDescription = a.FullDescription,
-                Price = a.Price,
-                BGUrl = a.BGUrl,
-                ImageUrl = a.ImageUrl,
-                City = a.City,
-                Duration = a.Duration,
-                BestTimeToVisit = a.BestTimeToVisit,
-                OpeningHours = a.OpeningHours,
-                Rating = a.Rating,
-                NumberOfReviews = a.NumberOfReviews,
-                CountryId = a.CountryId
-            };
+            return attraction;
         }
 
         public bool Create(AttractionDto dto)
@@ -83,23 +68,27 @@ namespace Eurasia.BusinessLogic.Functions.Attraction
         public bool Update(AttractionDto dto)
         {
             var existing = base.GetById(dto.Id);
+
             if (existing == null) return false;
+            var attractionToUpdate = new AttractionData
+            {
+                Id = dto.Id,
+                Name = dto.Name,
+                Description = dto.Description,
+                FullDescription = dto.FullDescription,
+                Price = dto.Price,
+                BGUrl = dto.BGUrl,
+                ImageUrl = dto.ImageUrl,
+                City = dto.City,
+                Duration = dto.Duration,
+                BestTimeToVisit = dto.BestTimeToVisit,
+                OpeningHours = dto.OpeningHours,
+                Rating = dto.Rating,
+                NumberOfReviews = dto.NumberOfReviews,
+                CountryId = dto.CountryId
+            };
 
-            existing.Name = dto.Name;
-            existing.Description = dto.Description;
-            existing.FullDescription = dto.FullDescription;
-            existing.Price = dto.Price;
-            existing.BGUrl = dto.BGUrl;
-            existing.ImageUrl = dto.ImageUrl;
-            existing.City = dto.City;
-            existing.Duration = dto.Duration;
-            existing.BestTimeToVisit = dto.BestTimeToVisit;
-            existing.OpeningHours = dto.OpeningHours;
-            existing.Rating = dto.Rating;
-            existing.NumberOfReviews = dto.NumberOfReviews;
-            existing.CountryId = dto.CountryId;
-
-            return base.Update(existing);
+            return base.Update(attractionToUpdate);
         }
 
         public bool Delete(int id)

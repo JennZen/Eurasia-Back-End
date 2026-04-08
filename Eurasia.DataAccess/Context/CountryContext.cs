@@ -15,19 +15,24 @@ namespace Eurasia.DataAccess.Context
     public class CountryContext : DbContext
     {
         public DbSet<CountryData> Countries { get; set; }
-        public DbSet<CountryLanguage> CountryLanguages { get; set; }
-        public DbSet<Language> Languages { get; set; }
+        public DbSet<Language> Language { get; set; }
+        public DbSet<CountryLanguage> CountryLanguage { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(DbSession.ConnectionString);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Language>()
-                .ToTable("Languages");
-
             modelBuilder.Entity<CountryLanguage>()
                 .HasKey(cl => new { cl.CountryId, cl.LanguageId });
+
+            modelBuilder.Entity<CountryData>()
+                .HasIndex(c => c.Name)
+                .IsUnique();
+
+            modelBuilder.Entity<Language>()
+                .HasIndex(l => l.Name)
+                .IsUnique();
 
             modelBuilder.Entity<CountryData>()
                 .Property(e => e.Continents)

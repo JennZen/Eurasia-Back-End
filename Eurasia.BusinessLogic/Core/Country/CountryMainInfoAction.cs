@@ -20,17 +20,29 @@ namespace Eurasia.BusinessLogic.Core.Country
                 .ToList();
         }
 
-        public CountryData? Create(CountryData country)
+        public CountryData Create(CountryData country)
         {
-            var existingCountry = _db.Countries.Any(c => c.Id == country.Id);
+            var existingCountry = _db.Countries.FirstOrDefault(c => c.Name == country.Name);
+            if (existingCountry != null) return existingCountry;
 
-            if (!existingCountry)
+            if (country.CountryLanguages != null)
             {
-                _db.Add(country);
-                _db.SaveChanges();
-                return country;
+                foreach (var cl in country.CountryLanguages)
+                {
+                    var existingLang = _db.Language
+                        .FirstOrDefault(l => l.Name == cl.Language.Name);
+
+                    if (existingLang != null)
+                    {
+                        cl.Language = existingLang;
+                        cl.LanguageId = existingLang.Id;
+                    }
+                }
             }
-            return null;
+
+            _db.Countries.Add(country);
+            _db.SaveChanges();
+            return country;
         }
 
         public CountryData? GetById(int id)

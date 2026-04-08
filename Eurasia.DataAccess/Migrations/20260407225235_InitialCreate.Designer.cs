@@ -4,16 +4,19 @@ using Eurasia.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Eurasia.DataAccess.Migrations.Country
+namespace Eurasia.DataAccess.Migrations
 {
     [DbContext(typeof(CountryContext))]
-    partial class CountryContextModelSnapshot : ModelSnapshot
+    [Migration("20260407225235_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +57,7 @@ namespace Eurasia.DataAccess.Migrations.Country
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Population")
                         .HasColumnType("int");
@@ -69,6 +72,9 @@ namespace Eurasia.DataAccess.Migrations.Country
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Countries");
                 });
@@ -86,12 +92,15 @@ namespace Eurasia.DataAccess.Migrations.Country
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Language");
                 });
@@ -108,7 +117,7 @@ namespace Eurasia.DataAccess.Migrations.Country
 
                     b.HasIndex("LanguageId");
 
-                    b.ToTable("CountryLanguages");
+                    b.ToTable("CountryLanguage");
                 });
 
             modelBuilder.Entity("Eurasia.Domains.Entities.Relations.CountryLanguage", b =>

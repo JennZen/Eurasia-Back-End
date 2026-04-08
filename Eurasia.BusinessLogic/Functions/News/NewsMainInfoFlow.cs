@@ -5,12 +5,12 @@ using Eurasia.BusinessLogic.Interface;
 
 namespace Eurasia.BusinessLogic.Functions.News
 {
-    public class NewsMainInfoFlow: NewsMainInfoAction, INewsAction
+    public class NewsMainInfoFlow : NewsMainInfoAction, INewsAction
     {
         public List<NewsMainInfoDto>? GetAllNews()
         {
             var newsList = base.GetAllNews();
-            
+
             return newsList?.Select(news => new NewsMainInfoDto
             {
                 Id = news.Id,
@@ -53,12 +53,11 @@ namespace Eurasia.BusinessLogic.Functions.News
             var existingNews = base.GetById(newsDto.Id);
             if (existingNews == null) return false;
 
-            existingNews.Id = newsDto.Id;
             existingNews.Title = newsDto.Title;
             existingNews.Description = newsDto.Description;
             existingNews.ImageUrl = newsDto.ImageUrl;
             existingNews.PublishedAt = newsDto.PublishedAt;
-            return true;
+            return base.Update(existingNews);
         }
         public bool Delete(int id)
         {

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Eurasia.Domains.Entities.News
 {
-    public class NewsData: SharedFields
+    public class NewsData : SharedFields
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -13,7 +13,7 @@ namespace Eurasia.Domains.Entities.News
         //ENUM CATEGORY public string Category { get; set; }
 
         [Required]
-        [StringLength(100)]  
+        [StringLength(100)]
 
         public required string Title { get; set; }
 
