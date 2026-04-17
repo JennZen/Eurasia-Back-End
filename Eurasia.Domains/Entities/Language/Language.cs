@@ -1,4 +1,5 @@
-﻿using Eurasia.Domains.Entities.Refs;
+﻿using Eurasia.Domains.Entities.Country;
+using Eurasia.Domains.Entities.Refs;
 using Eurasia.Domains.Entities.Relations;
 
 namespace Eurasia.Domains.Entities.Language
@@ -9,6 +10,6 @@ namespace Eurasia.Domains.Entities.Language
 
         public required string Name { get; set; }
 
-        public List<CountryLanguage> CountryLanguages { get; set; }
+        public ICollection<CountryData> Countries { get; set; } = new List<CountryData>();
     }
 }

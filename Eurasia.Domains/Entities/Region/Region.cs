@@ -7,8 +7,6 @@ namespace Eurasia.Domains.Entities.Region
     {
         public int Id { get; set; }
         public required string Name { get; set; }
-
-        public int CountryId { get; set; }
-        public required CountryData Country { get; set; }
+        public ICollection<CountryData> Countries { get; set; } = new List<CountryData>();
     }
 }

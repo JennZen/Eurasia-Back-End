@@ -13,7 +13,6 @@ namespace Eurasia.Domains.Entities.Country
 
         public string Content {  get; set; }
 
-        //public string NationalEmblemUrl { get; set; }
         public string BGUrl { get; set; }
     }
 }

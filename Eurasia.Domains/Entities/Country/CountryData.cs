@@ -1,9 +1,9 @@
 ﻿using Eurasia.Domains.Entities.Refs;
-using Eurasia.Domains.Entities.Relations;
-using Eurasia.Domains.Enums.Eurasia;
 using System.ComponentModel.DataAnnotations;
+using Eurasia.Domains.Entities.Language;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using Eurasia.Domains.Entities.Region;
+using Eurasia.Domains.Entities.Continent;
 
 namespace Eurasia.Domains.Entities.Country
 {
@@ -25,13 +25,12 @@ namespace Eurasia.Domains.Entities.Country
 
         [Range(0, int.MaxValue)]
         public int Population { get; set; }
-
-        public List<Continents>? Continents { get; set; }
+        public ICollection<Continent.Continent> Continents { get; set; } = new List<Continent.Continent>();
 
         [MaxLength(50)]
         public string? Currency { get; set; }
 
-        public List<string>? Regions { get; set; }
+        public ICollection<Region.Region> Regions { get; set; } = new List<Region.Region>();
 
         [Required]
         [MaxLength(100)]
@@ -40,7 +39,7 @@ namespace Eurasia.Domains.Entities.Country
         [Range(0, int.MaxValue)]
         public int GeographicalSize { get; set; }
 
-        public List<CountryLanguage>? CountryLanguages { get; set; }
+        public ICollection<Language.Language> Languages { get; set; } = new List<Language.Language>();
 
         [MaxLength(1000)]
         public string? Summary { get; set; }

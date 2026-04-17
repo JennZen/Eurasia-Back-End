@@ -1,6 +1,4 @@
-﻿using Eurasia.Domains.Enums.Eurasia;
-
-namespace Eurasia.Domains.Models.Country
+﻿namespace Eurasia.Domains.Models.Country
 {
     public class CountryMainInfoDto: CountryBaseDto
     {
