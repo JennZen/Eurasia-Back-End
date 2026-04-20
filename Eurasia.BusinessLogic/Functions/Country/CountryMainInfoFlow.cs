@@ -39,6 +39,17 @@ namespace Eurasia.BusinessLogic.Functions.Country
             }).ToList();
         }
 
+        public List<CountryListDto> GetCountriesList()
+        { 
+            var countries = base.GetCountryDatas();
+            return countries.Select(country => new CountryListDto
+            {
+                Id = country.Id,
+                Name = country.Name,
+                FlagUrl = country.FlagUrl
+            }).ToList();
+        }
+
         public CountryMainInfoDto? Create(CreateCountryDto dto)
         {
             var country = new CountryData

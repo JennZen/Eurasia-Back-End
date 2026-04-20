@@ -26,6 +26,14 @@ namespace Eurasia.Api.Controller
             return Ok(allCountries);
         }
 
+        [HttpGet("list")]
+        public IActionResult GetList()
+        {
+            var countriesList = _countries.GetCountriesList();
+            
+            return Ok(countriesList);
+        }
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
