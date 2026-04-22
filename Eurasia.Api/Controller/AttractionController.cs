@@ -34,7 +34,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] AttractionDto attraction)
+        public IActionResult Create([FromBody] AttractionMainInfoDto attraction)
         {
             if (attraction == null) return BadRequest("Invalid data");
 
@@ -46,7 +46,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, AttractionDto attraction)
+        public IActionResult Update(int id, AttractionMainInfoDto attraction)
         {
             attraction.Id = id;
             bool success = _attractions.Update(attraction);
@@ -64,6 +64,13 @@ namespace Eurasia.Api.Controller
                 return NotFound($"Attraction with ID {id} not found");
 
             return NoContent();
+        }
+
+        [HttpGet("cards")]
+        public IActionResult GetCards()
+        {
+            var cards = _attractions.GetAllCards();
+            return Ok(cards);
         }
     }
 }

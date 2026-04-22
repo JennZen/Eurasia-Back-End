@@ -1,8 +1,7 @@
-﻿using Eurasia.Domains.Entities.Country;
-using Eurasia.Domains.Entities.Refs;
+﻿using Eurasia.Domains.Entities.Refs;
 using Eurasia.Domains.Entities.Relations;
 
-namespace Eurasia.Domains.Entities.Language
+namespace Eurasia.Domains.Entities.Country
 {
     public class Language : SharedFields
     {

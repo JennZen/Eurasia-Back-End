@@ -1,10 +1,6 @@
 ﻿using Eurasia.DataAccess;
-using Eurasia.Domains.Entities.Continent;
 using Eurasia.Domains.Entities.Country;
-using Eurasia.Domains.Entities.Language;
-using Eurasia.Domains.Entities.Region;
 using Microsoft.EntityFrameworkCore;
-
 public class CountryContext : DbContext
 {
     public DbSet<CountryData> Countries { get; set; }

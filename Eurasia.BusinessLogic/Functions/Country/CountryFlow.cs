@@ -1,14 +1,11 @@
 ﻿using Eurasia.BusinessLogic.Core.Country;
 using Eurasia.BusinessLogic.Interface;
 using Eurasia.Domains.Entities.Country;
-using Eurasia.Domains.Entities.Language;
-using Eurasia.Domains.Entities.Region;
-using Eurasia.Domains.Entities.Continent;
 using Eurasia.Domains.Models.Country;
 
 namespace Eurasia.BusinessLogic.Functions.Country
 {
-    public class CountryMainInfoFlow : CountryMainInfoAction, ICountryAction
+    public class CountryFlow : CountryAction, ICountryAction
     {
         public List<CountryMainInfoDto> GetAllCountriesMainInfoDtos(List<int>? continentIds = null)
         {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Eurasia.BusinessLogic.Core.Country
 {
-    public class CountryMainInfoAction
+    public class CountryAction
     {
         private readonly CountryContext _db = new CountryContext();
 

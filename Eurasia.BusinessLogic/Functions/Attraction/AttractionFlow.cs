@@ -2,20 +2,15 @@
 using Eurasia.BusinessLogic.Interface;
 using Eurasia.Domains.Entities.AttractionData;
 using Eurasia.Domains.Models.Attraction;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Eurasia.BusinessLogic.Functions.Attraction
 {
     public class AttractionFlow : AttractionAction, IAttractionAction
     {
-        public List<AttractionDto> GetAll()
+        public List<AttractionMainInfoDto> GetAll()
         {
             var attractions = base.GetAttractions();
-            return attractions.Select(a => new AttractionDto
+            return attractions.Select(a => new AttractionMainInfoDto
             {
                 Id = a.Id,
                 Name = a.Name,
@@ -35,7 +30,7 @@ namespace Eurasia.BusinessLogic.Functions.Attraction
             }).ToList();
         }
 
-        public AttractionDto? GetById(int id)
+        public AttractionMainInfoDto? GetById(int id)
         {
             var attraction = base.GetById(id);
             if (attraction == null) return null;
@@ -43,7 +38,7 @@ namespace Eurasia.BusinessLogic.Functions.Attraction
             return attraction;
         }
 
-        public bool Create(AttractionDto dto)
+        public bool Create(AttractionMainInfoDto dto)
         {
             var attraction = new AttractionData
             {
@@ -65,7 +60,7 @@ namespace Eurasia.BusinessLogic.Functions.Attraction
             return base.Create(attraction);
         }
 
-        public bool Update(AttractionDto dto)
+        public bool Update(AttractionMainInfoDto dto)
         {
             var existing = base.GetById(dto.Id);
 
@@ -94,6 +89,22 @@ namespace Eurasia.BusinessLogic.Functions.Attraction
         public bool Delete(int id)
         {
             return base.Delete(id);
+        }
+        public List<AttractionCardDto> GetAllCards()
+        {
+            var attractions = base.GetAttractions();
+
+            return attractions.Select(a => new AttractionCardDto
+            {
+                Id = a.Id,
+                Name = a.Name,
+                Description = a.Description,
+                ImageUrl = a.ImageUrl,
+                OpeningHours = a.OpeningHours,
+                Rating = (double)a.Rating,
+                NumberOfReviews = a.NumberOfReviews,
+                CountryName = a.Country != null ? a.Country.Name : null
+            }).ToList();
         }
     }
 }

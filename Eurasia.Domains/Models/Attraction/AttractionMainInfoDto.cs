@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Eurasia.Domains.Models.Attraction
+﻿namespace Eurasia.Domains.Models.Attraction
 {
-    public class AttractionDto
+    public class AttractionMainInfoDto
     {
         public int Id { get; set; }
         public required string Name { get; set; }

@@ -1,7 +1,6 @@
-﻿using Eurasia.Domains.Entities.Country;
-using Eurasia.Domains.Entities.Refs;
+﻿using Eurasia.Domains.Entities.Refs;
 
-namespace Eurasia.Domains.Entities.Region
+namespace Eurasia.Domains.Entities.Country
 {
     public class Region
     {

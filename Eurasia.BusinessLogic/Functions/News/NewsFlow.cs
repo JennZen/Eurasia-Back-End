@@ -5,7 +5,7 @@ using Eurasia.BusinessLogic.Interface;
 
 namespace Eurasia.BusinessLogic.Functions.News
 {
-    public class NewsMainInfoFlow : NewsMainInfoAction, INewsAction
+    public class NewsFlow : NewsAction, INewsAction
     {
         public List<NewsMainInfoDto>? GetAllNews()
         {
