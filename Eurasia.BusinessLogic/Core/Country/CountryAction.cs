@@ -26,16 +26,49 @@ namespace Eurasia.BusinessLogic.Core.Country
             var regionNames = country.Regions?.Select(x => x.Name).ToList() ?? new();
             var continentNames = country.Continents?.Select(x => x.Name).ToList() ?? new();
 
-            country.Languages = _db.Language
+            var existingLanguages = _db.Language
                 .Where(l => languageNames.Contains(l.Name))
                 .ToList();
 
-            country.Regions = _db.Regions
+            var newLanguages = languageNames
+                .Where(name => !existingLanguages.Any(l => l.Name == name))
+                .Select(name => new Language { Name = name })
+                .ToList();
+
+            _db.Language.AddRange(newLanguages);
+
+            country.Languages = existingLanguages
+                .Concat(newLanguages)
+                .ToList();
+
+            var existingRegions = _db.Regions
                 .Where(r => regionNames.Contains(r.Name))
                 .ToList();
 
-            country.Continents = _db.Continents
+            var newRegions = regionNames
+                .Where(name => !existingRegions.Any(r => r.Name == name))
+                .Select(name => new Region { Name = name })
+                .ToList();
+
+            _db.Regions.AddRange(newRegions);
+
+            country.Regions = existingRegions
+                .Concat(newRegions)
+                .ToList();
+
+            var existingContinents = _db.Continents
                 .Where(c => continentNames.Contains(c.Name))
+                .ToList();
+
+            var newContinents = continentNames
+                .Where(name => !existingContinents.Any(c => c.Name == name))
+                .Select(name => new Continent { Name = name })
+                .ToList();
+
+            _db.Continents.AddRange(newContinents);
+
+            country.Continents = existingContinents
+                .Concat(newContinents)
                 .ToList();
 
             _db.Countries.Add(country);

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Eurasia.Domains.Entities.Relations
 {
-    public class UserFavoriteAttraction
+    public class UserFavoriteCountry
     {
         public int UserId { get; set; }
-        public int AttractionId { get; set; }
+        public int CountryId { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }
