@@ -17,6 +17,18 @@ namespace Eurasia.DataAccess.Context
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Ignore<Continent>();
+            modelBuilder.Ignore<Region>();
+            modelBuilder.Ignore<Language>();
+
+            modelBuilder.Entity<CountryData>(b =>
+            {
+                b.Ignore(c => c.Continents);
+                b.Ignore(c => c.Regions);
+                b.Ignore(c => c.Languages);
+                b.ToTable("Countries", t => t.ExcludeFromMigrations());
+            });
+
             modelBuilder.Entity<AttractionData>()
                 .HasOne(a => a.Country)
                 .WithMany()

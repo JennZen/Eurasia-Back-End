@@ -1,6 +1,10 @@
-﻿using Eurasia.BusinessLogic.Core.User;
+﻿using Eurasia.BusinessLogic.Core.Attraction;
+using Eurasia.BusinessLogic.Core.Country;
+using Eurasia.BusinessLogic.Core.User;
 using Eurasia.BusinessLogic.Interface;
 using Eurasia.Domains.Entities.User;
+using Eurasia.Domains.Models.Attraction;
+using Eurasia.Domains.Models.Country;
 using Eurasia.Domains.Models.User;
 using System;
 using System.Collections.Generic;
@@ -99,6 +103,40 @@ namespace Eurasia.BusinessLogic.Functions.User
         public bool Delete(int id)
         {
             return base.DeleteUser(id);
+        }
+        public List<CountryLikedCardDto> GetFavoriteCountries(int userId)
+        {
+            var ids = base.GetFavoriteCountryIds(userId);
+            var countryAction = new CountryAction();
+            return countryAction.GetCountryDatas()
+                .Where(c => ids.Contains(c.Id))
+                .Select(c => new CountryLikedCardDto
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    FlagUrl = c.FlagUrl,
+                    Capital = c.Capital,
+                    Population = c.Population,
+                    GeographicalSize = c.GeographicalSize,
+                    Region = c.Regions?.FirstOrDefault()?.Name
+                }).ToList();
+        }
+        public List<AttractionLikedCardDto> GetFavoriteAttractionIds(int userId)
+        {
+            var ids = base.GetFavoriteAttractionIds(userId);
+            var attractionAction = new AttractionAction();
+            return attractionAction.GetAttractions()
+                .Where(a => ids.Contains(a.Id))
+                .Select(a => new AttractionLikedCardDto
+                {
+                    Id = a.Id,
+                    Name = a.Name,
+                    ImageUrl = a.ImageUrl,
+                    City = a.City,
+                    Rating = a.Rating,
+                    Price = a.Price,
+                    CountryName = a.Country?.Name
+                }).ToList();
         }
     }
 }

@@ -16,11 +16,11 @@ namespace Eurasia.BusinessLogic.Core.Country
                 .ToList();
         }
 
-        public CountryData Create(CountryData country)
+        public CountryData? Create(CountryData country)
         {
             var existingCountry = _db.Countries.FirstOrDefault(c => c.Name == country.Name);
             if (existingCountry != null)
-                return existingCountry;
+                return null;
 
             var languageNames = country.Languages?.Select(x => x.Name).ToList() ?? new();
             var regionNames = country.Regions?.Select(x => x.Name).ToList() ?? new();

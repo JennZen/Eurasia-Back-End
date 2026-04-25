@@ -66,7 +66,7 @@ namespace Eurasia.DataAccess.Migrations
                     b.ToTable("CountryRegions", (string)null);
                 });
 
-            modelBuilder.Entity("Eurasia.Domains.Entities.Continent.Continent", b =>
+            modelBuilder.Entity("Eurasia.Domains.Entities.Country.Continent", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -139,7 +139,7 @@ namespace Eurasia.DataAccess.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("Eurasia.Domains.Entities.Language.Language", b =>
+            modelBuilder.Entity("Eurasia.Domains.Entities.Country.Language", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -165,7 +165,7 @@ namespace Eurasia.DataAccess.Migrations
                     b.ToTable("Language");
                 });
 
-            modelBuilder.Entity("Eurasia.Domains.Entities.Region.Region", b =>
+            modelBuilder.Entity("Eurasia.Domains.Entities.Country.Region", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -187,7 +187,7 @@ namespace Eurasia.DataAccess.Migrations
 
             modelBuilder.Entity("ContinentCountryData", b =>
                 {
-                    b.HasOne("Eurasia.Domains.Entities.Continent.Continent", null)
+                    b.HasOne("Eurasia.Domains.Entities.Country.Continent", null)
                         .WithMany()
                         .HasForeignKey("ContinentsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -208,7 +208,7 @@ namespace Eurasia.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Eurasia.Domains.Entities.Language.Language", null)
+                    b.HasOne("Eurasia.Domains.Entities.Country.Language", null)
                         .WithMany()
                         .HasForeignKey("LanguagesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -223,7 +223,7 @@ namespace Eurasia.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Eurasia.Domains.Entities.Region.Region", null)
+                    b.HasOne("Eurasia.Domains.Entities.Country.Region", null)
                         .WithMany()
                         .HasForeignKey("RegionsId")
                         .OnDelete(DeleteBehavior.Cascade)

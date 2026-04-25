@@ -2,6 +2,7 @@
 using Eurasia.BusinessLogic.Functions.Country;
 using Eurasia.BusinessLogic.Interface;
 using Eurasia.BusinessLogic.Functions.News;
+using Eurasia.BusinessLogic.Functions.Banner;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,10 @@ namespace Eurasia.BusinessLogic
         public IUserAction GetUserActions()
         {
             return new UserFlow();
+        }
+        public IBannerAction GetBannerActions()
+        {
+            return new BannerFlow();
         }
     }
 }

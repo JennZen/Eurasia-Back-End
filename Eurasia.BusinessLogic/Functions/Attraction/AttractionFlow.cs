@@ -47,22 +47,26 @@ namespace Eurasia.BusinessLogic.Functions.Attraction
         {
             var attraction = new AttractionData
             {
-                Id = dto.Id,
                 Name = dto.Name,
                 Description = dto.Description,
-                FullDescription = dto.FullDescription,
+                FullDescription = dto.FullDescription ?? string.Empty,
                 Price = dto.Price,
-                BGUrl = dto.BGUrl,
-                ImageUrl = dto.ImageUrl,
-                City = dto.City,
-                Duration = dto.Duration,
-                BestTimeToVisit = dto.BestTimeToVisit,
-                OpeningHours = dto.OpeningHours,
+                BGUrl = dto.BGUrl ?? string.Empty,
+                ImageUrl = dto.ImageUrl ?? string.Empty,
+                City = dto.City ?? string.Empty,
+                Duration = dto.Duration ?? string.Empty,
+                BestTimeToVisit = dto.BestTimeToVisit ?? string.Empty,
+                OpeningHours = dto.OpeningHours ?? string.Empty,
                 Rating = dto.Rating,
                 NumberOfReviews = dto.NumberOfReviews,
                 CountryId = dto.CountryId
             };
-            return base.Create(attraction);
+
+            var created = base.Create(attraction);
+            if (created == null) return false;
+
+            dto.Id = created.Id;
+            return true;
         }
 
         public bool Update(AttractionDto dto)
