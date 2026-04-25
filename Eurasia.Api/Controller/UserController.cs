@@ -74,7 +74,7 @@ namespace Eurasia.Api.Controller
         [HttpGet("{id}/favorites/countries")]
         public IActionResult GetFavoriteCountries(int id)
         {
-            return Ok(_users.GetFavoriteCountryIds(id));
+            return Ok(_users.GetFavoriteCountries(id));
         }
 
         [HttpPost("{id}/favorites/countries/{countryId}")]

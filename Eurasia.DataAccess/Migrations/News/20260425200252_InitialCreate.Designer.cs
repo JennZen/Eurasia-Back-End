@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Eurasia.DataAccess.Migrations.News
 {
     [DbContext(typeof(NewsContext))]
-    [Migration("20260407225353_InitialCreate")]
+    [Migration("20260425200252_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

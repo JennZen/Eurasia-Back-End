@@ -1,4 +1,6 @@
-﻿using Eurasia.Domains.Models.User;
+﻿using Eurasia.Domains.Models.Attraction;
+using Eurasia.Domains.Models.Country;
+using Eurasia.Domains.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +18,10 @@ namespace Eurasia.BusinessLogic.Interface
         bool Update(int id, UserUpdateDto dto);
         bool Delete(int id);
 
-        List<int> GetFavoriteCountryIds(int userId);
+        List<CountryLikedCardDto> GetFavoriteCountries(int userId);
         bool AddFavoriteCountry(int userId, int countryId);
         bool RemoveFavoriteCountry(int userId, int countryId);
-        List<int> GetFavoriteAttractionIds(int userId);
+        List<AttractionLikedCardDto> GetFavoriteAttractionIds(int userId);
         bool AddFavoriteAttraction(int userId, int attractionId);
         bool RemoveFavoriteAttraction(int userId, int attractionId);
     }

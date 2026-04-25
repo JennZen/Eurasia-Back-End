@@ -44,17 +44,17 @@ namespace Eurasia.BusinessLogic.Core.Attraction
             };
         }
 
-        public bool Create(AttractionData attraction)
+        public AttractionData? Create(AttractionData attraction)
         {
-            var existing = _db.Attractions.FirstOrDefault(a => a.Id == attraction.Id);
+            var existing = _db.Attractions
+                .FirstOrDefault(a => a.Name == attraction.Name && a.CountryId == attraction.CountryId);
 
-            if (existing == null)
-            {
-                _db.Attractions.Add(attraction);
-                _db.SaveChanges();
-                return true;
-            }
-            return false;
+            if (existing != null)
+                return null;
+
+            _db.Attractions.Add(attraction);
+            _db.SaveChanges();
+            return attraction;
         }
 
         public bool Update(AttractionData attraction)
