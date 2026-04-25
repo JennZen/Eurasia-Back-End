@@ -1,5 +1,4 @@
 ﻿using Eurasia.Domains.Entities.AttractionData;
-
 using Eurasia.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Eurasia.Domains.Models.Attraction;
@@ -18,14 +17,14 @@ namespace Eurasia.BusinessLogic.Core.Attraction
                 .ToList();
         }
 
-        public AttractionDto? GetById(int id)
+        public AttractionMainInfoDto? GetById(int id)
         {
             var attraction = _db.Attractions
                 .Include(a => a.Country)
                 .FirstOrDefault(a => a.Id == id);
 
             if (attraction == null) return null;
-            return new AttractionDto
+            return new AttractionMainInfoDto
             {
                 Id = attraction.Id,
                 Name = attraction.Name,

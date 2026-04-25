@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Eurasia.Domains.Entities.Continent;
+using Eurasia.Domains.Entities.Country;
 
 namespace Eurasia.Domains.Models.Country
 {

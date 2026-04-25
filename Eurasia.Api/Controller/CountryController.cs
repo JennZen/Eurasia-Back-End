@@ -1,6 +1,5 @@
 ﻿using Eurasia.BusinessLogic;
 using Eurasia.BusinessLogic.Interface;
-using Eurasia.Domains.Entities.Continent;
 using Eurasia.Domains.Entities.Country;
 using Eurasia.Domains.Models.Country;
 using Microsoft.AspNetCore.Http;
@@ -24,6 +23,14 @@ namespace Eurasia.Api.Controller
         {
             var allCountries = _countries.GetAllCountriesMainInfoDtos(continentIds);
             return Ok(allCountries);
+        }
+
+        [HttpGet("list")]
+        public IActionResult GetList()
+        {
+            var countriesList = _countries.GetCountriesList();
+            
+            return Ok(countriesList);
         }
 
         [HttpDelete("{id}")]

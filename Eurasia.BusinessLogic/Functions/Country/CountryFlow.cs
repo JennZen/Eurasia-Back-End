@@ -1,14 +1,11 @@
 ﻿using Eurasia.BusinessLogic.Core.Country;
 using Eurasia.BusinessLogic.Interface;
 using Eurasia.Domains.Entities.Country;
-using Eurasia.Domains.Entities.Language;
-using Eurasia.Domains.Entities.Region;
-using Eurasia.Domains.Entities.Continent;
 using Eurasia.Domains.Models.Country;
 
 namespace Eurasia.BusinessLogic.Functions.Country
 {
-    public class CountryMainInfoFlow : CountryMainInfoAction, ICountryAction
+    public class CountryFlow : CountryAction, ICountryAction
     {
         public List<CountryMainInfoDto> GetAllCountriesMainInfoDtos(List<int>? continentIds = null)
         {
@@ -36,6 +33,17 @@ namespace Eurasia.BusinessLogic.Functions.Country
                 Currency = country.Currency,
                 Capital = country.Capital,
                 GeographicalSize = country.GeographicalSize
+            }).ToList();
+        }
+
+        public List<CountryListDto> GetCountriesList()
+        { 
+            var countries = base.GetCountryDatas();
+            return countries.Select(country => new CountryListDto
+            {
+                Id = country.Id,
+                Name = country.Name,
+                FlagUrl = country.FlagUrl
             }).ToList();
         }
 

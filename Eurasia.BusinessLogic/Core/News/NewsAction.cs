@@ -3,7 +3,7 @@ using Eurasia.Domains.Entities.News;
 
 namespace Eurasia.BusinessLogic.Core.News
 {
-    public class NewsMainInfoAction
+    public class NewsAction
     {
         private readonly NewsContext _db = new NewsContext();
         public List<NewsData>? GetAllNews()
