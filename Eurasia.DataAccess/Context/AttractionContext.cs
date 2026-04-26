@@ -1,4 +1,5 @@
 ﻿using Eurasia.Domains.Entities.AttractionData;
+using Eurasia.Domains.Entities.Country;
 using Microsoft.EntityFrameworkCore;
 
 namespace Eurasia.DataAccess.Context

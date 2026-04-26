@@ -1,16 +1,12 @@
 ﻿using Eurasia.BusinessLogic.Core.Attraction;
 using Eurasia.BusinessLogic.Core.Country;
 using Eurasia.BusinessLogic.Core.User;
+using Eurasia.BusinessLogic.Helpers;
 using Eurasia.BusinessLogic.Interface;
 using Eurasia.Domains.Entities.User;
 using Eurasia.Domains.Models.Attraction;
 using Eurasia.Domains.Models.Country;
 using Eurasia.Domains.Models.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Eurasia.BusinessLogic.Functions.User
 {
@@ -24,7 +20,8 @@ namespace Eurasia.BusinessLogic.Functions.User
                 Name = u.Name,
                 Email = u.Email,
                 AvatarUrl = u.AvatarUrl,
-                Phone = u.Phone
+                Phone = u.Phone,
+                Role = u.Role
             }).ToList();
         }
 
@@ -39,7 +36,8 @@ namespace Eurasia.BusinessLogic.Functions.User
                 Name = u.Name,
                 Email = u.Email,
                 AvatarUrl = u.AvatarUrl,
-                Phone = u.Phone
+                Phone = u.Phone,
+                Role = u.Role
             };
         }
 
@@ -53,6 +51,7 @@ namespace Eurasia.BusinessLogic.Functions.User
                 Name = dto.Name,
                 Email = dto.Email,
                 PasswordHash = HashPassword(dto.Password),
+                Role = dto.Role,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };
@@ -66,7 +65,8 @@ namespace Eurasia.BusinessLogic.Functions.User
                 Name = user.Name,
                 Email = user.Email,
                 AvatarUrl = user.AvatarUrl,
-                Phone = user.Phone
+                Phone = user.Phone,
+                Role = user.Role
             };
         }
 
@@ -78,13 +78,17 @@ namespace Eurasia.BusinessLogic.Functions.User
             var hash = HashPassword(dto.Password);
             if (user.PasswordHash != hash) return null;
 
+            var token = JwtHelper.GenerateToken(user.Id, user.Email, user.Role);
+
             return new UserDto
             {
                 Id = user.Id,
                 Name = user.Name,
                 Email = user.Email,
                 AvatarUrl = user.AvatarUrl,
-                Phone = user.Phone
+                Phone = user.Phone,
+                Role = user.Role,
+                Token = token
             };
         }
 

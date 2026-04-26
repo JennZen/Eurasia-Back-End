@@ -21,5 +21,8 @@ namespace Eurasia.Domains.Models.User
         [Required]
         [StringLength(50, MinimumLength = 6)]
         public string Password { get; set; }
+
+        [StringLength(20)]
+        public string Role { get; set; } = "User";
     }
 }

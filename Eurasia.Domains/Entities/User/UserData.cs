@@ -32,5 +32,8 @@ namespace Eurasia.Domains.Entities.User
 
         [StringLength(20)]
         public string? Phone { get; set; }
+
+        [StringLength(20)]
+        public string Role { get; set; } = "User"; 
     }
 }

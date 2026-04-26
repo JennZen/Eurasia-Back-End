@@ -13,5 +13,7 @@ namespace Eurasia.Domains.Models.User
         public string Email { get; set; }
         public string? AvatarUrl { get; set; }
         public string? Phone { get; set; }
+        public string Role { get; set; }
+        public string? Token { get; set; }
     }
 }
