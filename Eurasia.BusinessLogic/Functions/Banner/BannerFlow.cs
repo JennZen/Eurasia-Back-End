@@ -35,7 +35,7 @@ namespace Eurasia.BusinessLogic.Functions.Banner
                 Title = c.Name,
                 ImageUrl = c.FlagUrl,
                 Population = c.Population.ToString(),
-                Territory = $"{c.GeographicalSize} KM²",
+                Territory = $"{c.GeographicalSize}",
                 Capital = c.Capital
             };
         }

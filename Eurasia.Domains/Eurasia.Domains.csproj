@@ -7,9 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\Continent\" />
-    <Folder Include="Entities\Language\" />
-    <Folder Include="Entities\Region\" />
+    <Compile Remove="Entities\Continent\**" />
+    <Compile Remove="Entities\Language\**" />
+    <Compile Remove="Entities\Region\**" />
+    <EmbeddedResource Remove="Entities\Continent\**" />
+    <EmbeddedResource Remove="Entities\Language\**" />
+    <EmbeddedResource Remove="Entities\Region\**" />
+    <None Remove="Entities\Continent\**" />
+    <None Remove="Entities\Language\**" />
+    <None Remove="Entities\Region\**" />
   </ItemGroup>
 
 </Project>

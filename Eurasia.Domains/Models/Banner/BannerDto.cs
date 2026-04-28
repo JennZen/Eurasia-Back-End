@@ -10,11 +10,9 @@ namespace Eurasia.Domains.Models.Banner
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string? Subtitle { get; set; }
         public string? ImageUrl { get; set; }
         public string? Population { get; set; }
         public string? Territory { get; set; }
         public string? Capital { get; set; }
-        public string? Link { get; set; }
     }
 }

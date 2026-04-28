@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Eurasia.DataAccess.Migrations
+namespace Eurasia.DataAccess.Migrations.Country
 {
     [DbContext(typeof(CountryContext))]
     partial class CountryContextModelSnapshot : ModelSnapshot

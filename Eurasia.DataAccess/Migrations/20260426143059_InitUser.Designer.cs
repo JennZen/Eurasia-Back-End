@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Eurasia.DataAccess.Migrations.User
+namespace Eurasia.DataAccess.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20260426140355_AddRoleToUser")]
-    partial class AddRoleToUser
+    [Migration("20260426143059_InitUser")]
+    partial class InitUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

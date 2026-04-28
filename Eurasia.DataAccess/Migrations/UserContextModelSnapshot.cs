@@ -4,19 +4,16 @@ using Eurasia.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Eurasia.DataAccess.Migrations.User
+namespace Eurasia.DataAccess.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20260425200326_InitialCreate")]
-    partial class InitialCreate
+    partial class UserContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,6 +85,11 @@ namespace Eurasia.DataAccess.Migrations.User
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Phone")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 

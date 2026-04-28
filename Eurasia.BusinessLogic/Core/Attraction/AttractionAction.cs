@@ -17,31 +17,11 @@ namespace Eurasia.BusinessLogic.Core.Attraction
                 .ToList();
         }
 
-        public AttractionMainInfoDto? GetById(int id)
+        public AttractionData? GetById(int id)
         {
-            var attraction = _db.Attractions
+            return _db.Attractions
                 .Include(a => a.Country)
                 .FirstOrDefault(a => a.Id == id);
-
-            if (attraction == null) return null;
-            return new AttractionMainInfoDto
-            {
-                Id = attraction.Id,
-                Name = attraction.Name,
-                Description = attraction.Description,
-                FullDescription = attraction.FullDescription,
-                Price = attraction.Price,
-                BGUrl = attraction.BGUrl,
-                ImageUrl = attraction.ImageUrl,
-                City = attraction.City,
-                Duration = attraction.Duration,
-                BestTimeToVisit = attraction.BestTimeToVisit,
-                OpeningHours = attraction.OpeningHours,
-                Rating = attraction.Rating,
-                NumberOfReviews = attraction.NumberOfReviews,
-                CountryId = attraction.CountryId,
-                CountryName = attraction.Country?.Name
-            };
         }
 
         public AttractionData? Create(AttractionData attraction)

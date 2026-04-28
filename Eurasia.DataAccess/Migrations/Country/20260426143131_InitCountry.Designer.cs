@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Eurasia.DataAccess.Migrations
+namespace Eurasia.DataAccess.Migrations.Country
 {
     [DbContext(typeof(CountryContext))]
-    [Migration("20260425200159_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260426143131_InitCountry")]
+    partial class InitCountry
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Eurasia.DataAccess.Migrations.News
 {
     [DbContext(typeof(NewsContext))]
-    [Migration("20260425200252_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260426143144_InitNews")]
+    partial class InitNews
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

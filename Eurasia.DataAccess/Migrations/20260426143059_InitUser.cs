@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Eurasia.DataAccess.Migrations.User
+namespace Eurasia.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,6 +48,7 @@ namespace Eurasia.DataAccess.Migrations.User
                     PasswordHash = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     AvatarUrl = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    Role = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
