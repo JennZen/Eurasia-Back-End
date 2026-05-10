@@ -1,11 +1,13 @@
 ﻿using Eurasia.BusinessLogic.Interface;
 using Eurasia.Domains.Models.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Eurasia.Api.Controller
 {
     [Route("api/users")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         internal IUserAction _users;
@@ -17,12 +19,14 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpGet]
+        [Authorize(Roles =  "Admin")]
         public IActionResult GetAll()
         {
             return Ok(_users.GetAll());
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetById(int id)
         {
             var user = _users.GetById(id);
@@ -35,6 +39,12 @@ namespace Eurasia.Api.Controller
         {
             if (dto == null) return BadRequest("Invalid data");
 
+            var currentUserId = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)!.Value);
+            if (currentUserId != id && !User.IsInRole("Admin"))
+            {
+                return StatusCode(403, "You can only edit your own profile");
+            }
+
             bool success = _users.Update(id, dto);
             if (!success) return NotFound($"User with ID {id} not found");
 
@@ -42,6 +52,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             bool success = _users.Delete(id);
@@ -50,12 +61,14 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpGet("{id}/favorites/countries")]
+        [Authorize(Roles = "User,Admin")]
         public IActionResult GetFavoriteCountries(int id)
         {
             return Ok(_users.GetFavoriteCountries(id));
         }
 
         [HttpPost("{id}/favorites/countries/{countryId}")]
+        [Authorize(Roles = "User,Admin")]
         public IActionResult AddFavoriteCountry(int id, int countryId)
         {
             bool success = _users.AddFavoriteCountry(id, countryId);
@@ -64,6 +77,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpDelete("{id}/favorites/countries/{countryId}")]
+        [Authorize(Roles = "User,Admin")]
         public IActionResult RemoveFavoriteCountry(int id, int countryId)
         {
             bool success = _users.RemoveFavoriteCountry(id, countryId);
@@ -72,12 +86,14 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpGet("{id}/favorites/attractions")]
+        [Authorize(Roles = "User,Admin")]
         public IActionResult GetFavoriteAttractions(int id)
         {
             return Ok(_users.GetFavoriteAttractionIds(id));
         }
 
         [HttpPost("{id}/favorites/attractions/{attractionId}")]
+        [Authorize(Roles = "User,Admin")]
         public IActionResult AddFavoriteAttraction(int id, int attractionId)
         {
             bool success = _users.AddFavoriteAttraction(id, attractionId);
@@ -86,6 +102,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpDelete("{id}/favorites/attractions/{attractionId}")]
+        [Authorize(Roles = "User,Admin")]
         public IActionResult RemoveFavoriteAttraction(int id, int attractionId)
         {
             bool success = _users.RemoveFavoriteAttraction(id, attractionId);

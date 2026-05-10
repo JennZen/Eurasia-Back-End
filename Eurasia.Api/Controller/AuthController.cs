@@ -1,5 +1,6 @@
 ﻿using Eurasia.BusinessLogic.Interface;
 using Eurasia.Domains.Models.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace Eurasia.Api.Controller
 {
     [Route("api/auth")]
     [ApiController]
+    [Authorize]
     public class AuthController : ControllerBase
     {
         internal IAuthAction _auth;
@@ -18,6 +20,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpPost("login")]
+        [AllowAnonymous]
         public IActionResult Login([FromBody] UserLoginDto dto)
         {
             if (dto == null) return BadRequest("Invalid data");
@@ -29,6 +32,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpPost("register")]
+        [AllowAnonymous]
         public IActionResult Register([FromBody] UserRegisterDto dto)
         {
             if (dto == null) return BadRequest("Invalid data");

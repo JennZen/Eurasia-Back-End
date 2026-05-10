@@ -1,11 +1,13 @@
 ﻿using Eurasia.BusinessLogic.Interface;
 using Eurasia.Domains.Models.Attraction;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Eurasia.Api.Controller
 {
     [Route("api/attractions")]
     [ApiController]
+    [Authorize]
     public class AttractionController : ControllerBase
     {
         internal IAttractionAction _attractions;
@@ -17,6 +19,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetAll()
         {
             var attractions = _attractions.GetAll();
@@ -24,6 +27,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public IActionResult GetById(int id)
         {
             var attraction = _attractions.GetById(id);
@@ -34,6 +38,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create([FromBody] AttractionMainInfoDto attraction)
         {
             if (attraction == null) return BadRequest("Invalid data");
@@ -46,6 +51,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Update(int id, AttractionMainInfoDto attraction)
         {
             attraction.Id = id;
@@ -57,6 +63,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             bool success = _attractions.Delete(id);
@@ -67,6 +74,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpGet("cards")]
+        [AllowAnonymous]
         public IActionResult GetCards()
         {
             var cards = _attractions.GetAllCards();
