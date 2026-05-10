@@ -9,13 +9,8 @@ namespace Eurasia.Domains.Models.User
 {
     public class UserUpdateDto
     {
-        [StringLength(50, MinimumLength = 2)]
         public string? Name { get; set; }
-
-        [StringLength(500)]
         public string? AvatarUrl { get; set; }
-
-        [StringLength(20)]
         public string? Phone { get; set; }
     }
 }

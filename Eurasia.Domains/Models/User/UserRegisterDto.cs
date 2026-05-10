@@ -9,20 +9,8 @@ namespace Eurasia.Domains.Models.User
 {
     public class UserRegisterDto
     {
-        [Required]
-        [StringLength(50, MinimumLength = 2)]
         public string Name { get; set; }
-
-        [Required]
-        [StringLength(100, MinimumLength = 5)]
-        [EmailAddress]
         public string Email { get; set; }
-
-        [Required]
-        [StringLength(50, MinimumLength = 6)]
         public string Password { get; set; }
-
-        [StringLength(20)]
-        public string Role { get; set; } = "User";
     }
 }

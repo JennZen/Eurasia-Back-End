@@ -11,20 +11,21 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
     {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes("meow-meow-MEOW-MEOW-meow-meow-MEOW-MEOW-meow")),
-            ValidateIssuer = true,
-            ValidIssuer = "EurasiaApi",
-            ValidateAudience = true,
-            ValidAudience = "EurasiaClient",
-            ValidateLifetime = true
-        };
-    });
+        ValidateIssuer = true,
+        ValidIssuer = "eUShopApi",
+        ValidateAudience = true,
+        ValidAudience = "eUShopClients",
+        ValidateLifetime = true,
+        // проверка "exp"
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+    "tw_curs2026_super_secret_min_32_caractere!"))
+    };
+});
 
 builder.Services.AddAuthorization();
 
