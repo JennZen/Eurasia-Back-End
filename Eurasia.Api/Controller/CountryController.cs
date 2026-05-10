@@ -1,14 +1,13 @@
-﻿using Eurasia.BusinessLogic;
-using Eurasia.BusinessLogic.Interface;
-using Eurasia.Domains.Entities.Country;
+﻿using Eurasia.BusinessLogic.Interface;
 using Eurasia.Domains.Models.Country;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Eurasia.Api.Controller
 {
     [Route("api/countries")]
     [ApiController]
+    [Authorize]
     public class CountryController : ControllerBase  
     {
         internal ICountryAction _countries;
@@ -19,6 +18,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Get([FromQuery] List<int>? continentIds)
         {
             var allCountries = _countries.GetAllCountriesMainInfoDtos(continentIds);
@@ -26,6 +26,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpGet("list")]
+        [AllowAnonymous]
         public IActionResult GetList()
         {
             var countriesList = _countries.GetCountriesList();
@@ -34,6 +35,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             bool success =_countries.Delete(id);
@@ -43,6 +45,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public IActionResult GetById(int id)
         {
             CountryMainInfoDto? country = _countries.GetById(id);
@@ -55,6 +58,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create([FromBody] CreateCountryDto country)
         {
             if (country == null) return BadRequest("Invalid data");
@@ -69,6 +73,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Update(int id, CountryMainInfoDto country)
         {
             country.Id = id;

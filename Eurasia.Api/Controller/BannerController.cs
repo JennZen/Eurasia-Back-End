@@ -1,11 +1,13 @@
 ﻿using Eurasia.BusinessLogic.Interface;
 using Eurasia.Domains.Models.Banner;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Eurasia.Api.Controller
 {
     [Route("api/banners")]
     [ApiController]
+    [Authorize]
     public class BannerController : ControllerBase
     {
         internal IBannerAction _banners;
@@ -17,12 +19,14 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetAll([FromQuery] int count = 4)
         {
             return Ok(_banners.GetAll(count));
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public IActionResult GetById(int id)
         {
             BannerDto? banner = _banners.GetById(id);

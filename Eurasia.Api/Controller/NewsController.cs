@@ -1,11 +1,13 @@
 ﻿using Eurasia.BusinessLogic.Interface;
 using Eurasia.Domains.Models.News;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Eurasia.Api.Controller
 {
     [Route("api/news")]
     [ApiController]
+    [Authorize]
     public class NewsController : ControllerBase
     {
         internal INewsAction _news;
@@ -16,6 +18,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetAll()
         {
 
@@ -24,6 +27,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             bool success = _news.Delete(id);
@@ -33,6 +37,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public IActionResult GetById(int id)
         {
             NewsMainInfoDto? news = _news.GetById(id);
@@ -45,6 +50,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create([FromBody] NewsMainInfoDto newsDto)
         {
             if (newsDto == null) return BadRequest("Invalid data");
@@ -59,6 +65,7 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Update(int id, NewsMainInfoDto newsDto)
         {
             newsDto.Id = id;
