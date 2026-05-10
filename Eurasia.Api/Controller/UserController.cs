@@ -30,28 +30,6 @@ namespace Eurasia.Api.Controller
             return Ok(user);
         }
 
-        [HttpPost("register")]
-        public IActionResult Register([FromBody] UserRegisterDto dto)
-        {
-            if (dto == null) return BadRequest("Invalid data");
-
-            var user = _users.Register(dto);
-            if (user == null) return Conflict(new { message = "User with this email already exists." });
-
-            return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
-        }
-
-        [HttpPost("login")]
-        public IActionResult Login([FromBody] UserLoginDto dto)
-        {
-            if (dto == null) return BadRequest("Invalid data");
-
-            var user = _users.Login(dto);
-            if (user == null) return Unauthorized(new { message = "Invalid email or password." });
-
-            return Ok(user);
-        }
-
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] UserUpdateDto dto)
         {

@@ -13,8 +13,6 @@ namespace Eurasia.BusinessLogic.Interface
     {
         List<UserDto> GetAll();
         UserDto? GetById(int id);
-        UserDto? Register(UserRegisterDto dto);
-        UserDto? Login(UserLoginDto dto);
         bool Update(int id, UserUpdateDto dto);
         bool Delete(int id);
 

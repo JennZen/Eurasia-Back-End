@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Eurasia.BusinessLogic.Functions.User;
+using Eurasia.BusinessLogic.Functions.Auth;
 
 namespace Eurasia.BusinessLogic
 {
@@ -37,6 +38,11 @@ namespace Eurasia.BusinessLogic
         public IBannerAction GetBannerActions()
         {
             return new BannerFlow();
+        }
+
+        public IAuthAction GetAuthActions()
+        {
+            return new AuthFlow();
         }
     }
 }

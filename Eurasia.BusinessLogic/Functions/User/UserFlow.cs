@@ -1,7 +1,6 @@
 ﻿using Eurasia.BusinessLogic.Core.Attraction;
 using Eurasia.BusinessLogic.Core.Country;
 using Eurasia.BusinessLogic.Core.User;
-using Eurasia.BusinessLogic.Helpers;
 using Eurasia.BusinessLogic.Interface;
 using Eurasia.Domains.Entities.User;
 using Eurasia.Domains.Models.Attraction;
@@ -40,58 +39,6 @@ namespace Eurasia.BusinessLogic.Functions.User
                 Role = u.Role
             };
         }
-
-        public UserDto? Register(UserRegisterDto dto)
-        {
-            var existing = base.GetUserByEmail(dto.Email);
-            if (existing != null) return null;
-
-            var user = new UserData
-            {
-                Name = dto.Name,
-                Email = dto.Email,
-                PasswordHash = HashPassword(dto.Password),
-                Role = dto.Role,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
-            };
-
-            bool created = base.CreateUser(user);
-            if (!created) return null;
-
-            return new UserDto
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                AvatarUrl = user.AvatarUrl,
-                Phone = user.Phone,
-                Role = user.Role
-            };
-        }
-
-        public UserDto? Login(UserLoginDto dto)
-        {
-            var user = base.GetUserByEmail(dto.Email);
-            if (user == null) return null;
-
-            var hash = HashPassword(dto.Password);
-            if (user.PasswordHash != hash) return null;
-
-            var token = JwtHelper.GenerateToken(user.Id, user.Email, user.Role);
-
-            return new UserDto
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                AvatarUrl = user.AvatarUrl,
-                Phone = user.Phone,
-                Role = user.Role,
-                Token = token
-            };
-        }
-
         public bool Update(int id, UserUpdateDto dto)
         {
             var user = base.GetUserById(id);

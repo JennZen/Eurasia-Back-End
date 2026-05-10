@@ -13,9 +13,12 @@ namespace Eurasia.BusinessLogic.Core.User
 
         protected static string HashPassword(string password)
         {
-            // It will need to be converted to symmetric encryption as we were taught in TSI
-            var bytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
-            return Convert.ToBase64String(bytes);
+            return BCrypt.Net.BCrypt.HashPassword(password, workFactor: 12);
+        }
+
+        protected static bool VerifyPassword(string password, string hash)
+        {
+            return BCrypt.Net.BCrypt.Verify(password, hash);
         }
 
         public List<UserData> GetUsers()
