@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Eurasia.DataAccess.Migrations
+namespace Eurasia.DataAccess.Migrations.Quiz
 {
-    [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(QuizContext))]
+    partial class QuizContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -53,39 +53,7 @@ namespace Eurasia.DataAccess.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("EurasiaQuizResult");
-                });
-
-            modelBuilder.Entity("Eurasia.Domains.Entities.Relations.UserFavoriteAttraction", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AttractionId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("UserId", "AttractionId");
-
-                    b.ToTable("UserFavoriteAttractions");
-                });
-
-            modelBuilder.Entity("Eurasia.Domains.Entities.Relations.UserFavoriteCountry", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("UserId", "CountryId");
-
-                    b.ToTable("UserFavoriteCountries");
+                    b.ToTable("EurasiaQuizResults");
                 });
 
             modelBuilder.Entity("Eurasia.Domains.Entities.User.UserData", b =>
@@ -132,7 +100,7 @@ namespace Eurasia.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("UserData");
                 });
 
             modelBuilder.Entity("Eurasia.Domains.Entities.Relations.EurasiaQuizResult", b =>

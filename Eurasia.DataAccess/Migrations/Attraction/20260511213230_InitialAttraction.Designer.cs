@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Eurasia.DataAccess.Migrations.Attraction
 {
     [DbContext(typeof(AttractionContext))]
-    [Migration("20260426143113_InitAttraction")]
-    partial class InitAttraction
+    [Migration("20260511213230_InitialAttraction")]
+    partial class InitialAttraction
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

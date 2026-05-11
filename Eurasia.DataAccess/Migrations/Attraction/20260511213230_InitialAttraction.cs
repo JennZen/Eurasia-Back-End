@@ -5,7 +5,7 @@
 namespace Eurasia.DataAccess.Migrations.Attraction
 {
     /// <inheritdoc />
-    public partial class InitAttraction : Migration
+    public partial class InitialAttraction : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Eurasia.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class InitUser : Migration
+    public partial class InitialUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,11 +56,44 @@ namespace Eurasia.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "EurasiaQuizResult",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CountriesGuessed = table.Column<int>(type: "int", nullable: false),
+                    TotalCountriesCount = table.Column<int>(type: "int", nullable: false),
+                    TimeSpentSeconds = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EurasiaQuizResult", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EurasiaQuizResult_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EurasiaQuizResult_UserId",
+                table: "EurasiaQuizResult",
+                column: "UserId",
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "EurasiaQuizResult");
+
             migrationBuilder.DropTable(
                 name: "UserFavoriteAttractions");
 

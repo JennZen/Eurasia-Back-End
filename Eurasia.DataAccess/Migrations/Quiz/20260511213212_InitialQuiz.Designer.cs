@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Eurasia.DataAccess.Migrations
+namespace Eurasia.DataAccess.Migrations.Quiz
 {
-    [DbContext(typeof(UserContext))]
-    [Migration("20260426143059_InitUser")]
-    partial class InitUser
+    [DbContext(typeof(QuizContext))]
+    [Migration("20260511213212_InitialQuiz")]
+    partial class InitialQuiz
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,36 +25,38 @@ namespace Eurasia.DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Eurasia.Domains.Entities.Relations.UserFavoriteAttraction", b =>
+            modelBuilder.Entity("Eurasia.Domains.Entities.Relations.EurasiaQuizResult", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("AttractionId")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CountriesGuessed")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("UserId", "AttractionId");
+                    b.Property<int>("TimeSpentSeconds")
+                        .HasColumnType("int");
 
-                    b.ToTable("UserFavoriteAttractions");
-                });
+                    b.Property<int>("TotalCountriesCount")
+                        .HasColumnType("int");
 
-            modelBuilder.Entity("Eurasia.Domains.Entities.Relations.UserFavoriteCountry", b =>
-                {
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
-                    b.HasKey("UserId", "CountryId");
-
-                    b.ToTable("UserFavoriteCountries");
+                    b.ToTable("EurasiaQuizResults");
                 });
 
             modelBuilder.Entity("Eurasia.Domains.Entities.User.UserData", b =>
@@ -101,7 +103,23 @@ namespace Eurasia.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("UserData");
+                });
+
+            modelBuilder.Entity("Eurasia.Domains.Entities.Relations.EurasiaQuizResult", b =>
+                {
+                    b.HasOne("Eurasia.Domains.Entities.User.UserData", "User")
+                        .WithOne("QuizRecord")
+                        .HasForeignKey("Eurasia.Domains.Entities.Relations.EurasiaQuizResult", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Eurasia.Domains.Entities.User.UserData", b =>
+                {
+                    b.Navigation("QuizRecord");
                 });
 #pragma warning restore 612, 618
         }

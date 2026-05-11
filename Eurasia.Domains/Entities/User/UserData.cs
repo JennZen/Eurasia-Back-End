@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Eurasia.Domains.Entities.Refs;
+using Eurasia.Domains.Entities.Relations;
 
 namespace Eurasia.Domains.Entities.User
 {
@@ -29,6 +30,8 @@ namespace Eurasia.Domains.Entities.User
         public string? Phone { get; set; }
 
         [StringLength(20)]
-        public string Role { get; set; } = "User"; 
+        public string Role { get; set; } = "User";
+
+        public virtual EurasiaQuizResult? QuizRecord { get; set; }
     }
 }

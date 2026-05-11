@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Eurasia.DataAccess.Migrations.Country
 {
     /// <inheritdoc />
-    public partial class InitCountry : Migration
+    public partial class InitialCountry : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

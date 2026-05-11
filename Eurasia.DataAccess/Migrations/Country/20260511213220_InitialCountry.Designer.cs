@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Eurasia.DataAccess.Migrations.Country
 {
     [DbContext(typeof(CountryContext))]
-    [Migration("20260426143131_InitCountry")]
-    partial class InitCountry
+    [Migration("20260511213220_InitialCountry")]
+    partial class InitialCountry
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

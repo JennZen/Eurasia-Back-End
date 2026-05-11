@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Eurasia.BusinessLogic.Functions.User;
 using Eurasia.BusinessLogic.Functions.Auth;
+using Eurasia.BusinessLogic.Functions.Quiz;
 
 namespace Eurasia.BusinessLogic
 {
@@ -43,6 +44,11 @@ namespace Eurasia.BusinessLogic
         public IAuthAction GetAuthActions()
         {
             return new AuthFlow();
+        }
+
+        public IQuizAction GetQuizActions()
+        {
+            return new QuizFlow();
         }
     }
 }
