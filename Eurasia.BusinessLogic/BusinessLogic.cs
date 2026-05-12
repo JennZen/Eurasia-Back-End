@@ -3,14 +3,15 @@ using Eurasia.BusinessLogic.Functions.Country;
 using Eurasia.BusinessLogic.Interface;
 using Eurasia.BusinessLogic.Functions.News;
 using Eurasia.BusinessLogic.Functions.Banner;
+using Eurasia.BusinessLogic.Functions.User;
+using Eurasia.BusinessLogic.Functions.Auth;
+using Eurasia.BusinessLogic.Functions.Quiz;
+using Eurasia.BusinessLogic.Functions.Admin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Eurasia.BusinessLogic.Functions.User;
-using Eurasia.BusinessLogic.Functions.Auth;
-using Eurasia.BusinessLogic.Functions.Quiz;
 
 namespace Eurasia.BusinessLogic
 {
@@ -49,6 +50,11 @@ namespace Eurasia.BusinessLogic
         public IQuizAction GetQuizActions()
         {
             return new QuizFlow();
+        }
+        
+        public IAdminAction GetAdminActions()
+        {
+            return new AdminFlow();
         }
     }
 }

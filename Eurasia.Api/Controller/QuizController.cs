@@ -28,7 +28,6 @@ namespace Eurasia.Api.Controller
             return Ok(record);
         }
 
-        [SwaggerBearer]
         [HttpPut("result")]
         [Authorize(Roles = "User,Admin")]
         public IActionResult UpdateQuizResult([FromBody] UpdateQuizResultDto resultDto)
