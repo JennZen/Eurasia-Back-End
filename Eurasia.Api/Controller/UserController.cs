@@ -19,7 +19,6 @@ namespace Eurasia.Api.Controller
         }
 
         [HttpGet]
-        [Authorize(Roles =  "Admin")]
         public IActionResult GetAll()
         {
             return Ok(_users.GetAll());

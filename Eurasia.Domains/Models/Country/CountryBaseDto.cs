@@ -21,6 +21,7 @@ namespace Eurasia.Domains.Models.Country
         public required string Capital { get; set; }
         public int GeographicalSize { get; set; }
 
-        public List<string>? Languages { get; set; }  
+        public List<string>? Languages { get; set; } 
+        public string? Summary { get; set; }
     }
 }

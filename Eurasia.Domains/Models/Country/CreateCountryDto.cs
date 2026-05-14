@@ -8,5 +8,6 @@ namespace Eurasia.Domains.Models.Country
 {
     public class CreateCountryDto: CountryBaseDto
     {
+        public string? Summary { get; set;}
     }
 }

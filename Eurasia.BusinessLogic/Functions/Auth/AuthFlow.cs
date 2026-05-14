@@ -14,7 +14,7 @@ namespace Eurasia.BusinessLogic.Functions.Auth
             var existingUser = base.Login(email, password);
             if (existingUser == null) return null;
 
-            var token = _tokenService.GenerateToken(existingUser.Id, existingUser.Name, "User");
+            var token = _tokenService.GenerateToken(existingUser.Id, existingUser.Name, existingUser.Role);
 
             return new UserLoginDto
             {

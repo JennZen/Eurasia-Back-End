@@ -49,6 +49,7 @@ namespace Eurasia.BusinessLogic.Functions.Country
 
         public CountryMainInfoDto? Create(CreateCountryDto dto)
         {
+            Console.WriteLine(dto.Summary);
             var country = new CountryData
             {
                 Population = dto.Population,
@@ -69,7 +70,8 @@ namespace Eurasia.BusinessLogic.Functions.Country
 
                 Continents = dto.Continents?
                     .Select(name => new Continent { Name = name })
-                    .ToList()
+                    .ToList(),
+                Summary = dto.Summary
             };
 
             var created = base.Create(country);
@@ -89,7 +91,8 @@ namespace Eurasia.BusinessLogic.Functions.Country
 
                 Currency = created.Currency,
                 Capital = created.Capital,
-                GeographicalSize = created.GeographicalSize
+                GeographicalSize = created.GeographicalSize,
+                Summary = created.Summary
             };
         }
 
@@ -116,7 +119,8 @@ namespace Eurasia.BusinessLogic.Functions.Country
 
                 Currency = country.Currency,
                 Capital = country.Capital,
-                GeographicalSize = country.GeographicalSize
+                GeographicalSize = country.GeographicalSize,
+                Summary = country.Summary
             };
         }
 
@@ -134,6 +138,7 @@ namespace Eurasia.BusinessLogic.Functions.Country
             existingCountry.Currency = dto.Currency;
             existingCountry.Capital = dto.Capital;
             existingCountry.GeographicalSize = dto.GeographicalSize;
+            existingCountry.Summary = dto.Summary;
 
             existingCountry.Languages = dto.Languages?
                 .Select(name => new Language { Name = name })
